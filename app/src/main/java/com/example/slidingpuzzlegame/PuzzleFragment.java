@@ -68,21 +68,7 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
 
         difficulty = getArguments().getInt("Difficulty");
         final GridLayout puzzleBoard = (GridLayout) rootView.findViewById(R.id.puzzle_board);
-        ViewTreeObserver viewTreeObserver = puzzleBoard.getViewTreeObserver();
-        if (viewTreeObserver.isAlive()) {
-            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    puzzleBoard.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    frameWidth = puzzleBoard.getWidth();
-                    frameHeight = puzzleBoard.getHeight();
-                }
-            });
-        }
-//rootView.getWidth() - puzzleBoard.getPaddingRight() - puzzleBoard.getPaddingLeft() -
-        frameWidth = puzzleBoard.getMeasuredWidthAndState();
-        frameHeight = rootView.getHeight();
-        puzzleMatrix = new PuzzleMatrix(difficulty, getResources(), this.getContext(), puzzleBoard, frameWidth, frameHeight);
+        puzzleMatrix = new PuzzleMatrix(difficulty, getResources(), this.getContext(), puzzleBoard);
         // Return the View for the fragment's UI.
         return rootView;
     }

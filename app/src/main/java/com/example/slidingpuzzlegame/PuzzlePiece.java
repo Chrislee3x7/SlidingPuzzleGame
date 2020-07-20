@@ -49,7 +49,7 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView im
         //this.pieceWidth = pieceWidth;
         //this.pieceHeight = pieceHeight;
         pieceImage = Bitmap.createBitmap(baseImage, baseColumn * pieceWidth, baseRow * pieceHeight, pieceWidth, pieceHeight);
-        setScaleType(ScaleType.CENTER_CROP);
+        setScaleType(ScaleType.CENTER_INSIDE);
         setAdjustViewBounds(false);
         //setPadding(4, 4, 4, 4);
 

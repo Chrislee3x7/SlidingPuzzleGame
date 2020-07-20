@@ -20,26 +20,17 @@ public class PuzzleMatrix {
     private Bitmap baseImage;
     private int pieceHeight;
     private int pieceWidth;
-    private int frameWidth;
-    private int frameHeight;
     private GridLayout puzzleBoard;
 
     private static final long pieceMovetime = 200;
 
 
-    public PuzzleMatrix(int difficulty, Resources resources, Context context, GridLayout puzzleBoard,
-                        int frameWidth, int frameHeight) {
-        this.frameHeight = frameHeight;
-        this.frameWidth = frameWidth;
+    public PuzzleMatrix(int difficulty, Resources resources, Context context, GridLayout puzzleBoard) {
         this.puzzleBoard = puzzleBoard;
         this.difficulty = difficulty;
         //minus 1 for open hole at the end
         pieceCount = (difficulty * difficulty) - 1;
-        baseImage = BitmapFactory.decodeResource(resources, R.drawable.silicon_chip_test_picture);
-        //crop
-        baseImage = Bitmap.createBitmap(baseImage, 0, 0,
-                baseImage.getWidth() - baseImage.getWidth() % difficulty,
-                baseImage.getHeight() - baseImage.getHeight() % difficulty);
+        baseImage = BitmapFactory.decodeResource(resources, R.drawable.sliding_puzzle_test_image);
         pieceWidth = baseImage.getWidth() / difficulty;
         pieceHeight = baseImage.getHeight() / difficulty;
 
