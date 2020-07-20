@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <shape
+            android:shape="rectangle">
+            <solid android:color="@color/black" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <!-- create the stroke for top, left, bottom and right with the dp you want -->
+    <item
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp">
+        <shape
+            android:shape="rectangle">
+            <solid android:color="@color/pink_orange" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+
+</layer-list>

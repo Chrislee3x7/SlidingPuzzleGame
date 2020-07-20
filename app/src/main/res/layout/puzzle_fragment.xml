@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".PuzzleFragment"
+    android:tag="puzzle_fragment_tag">
+
+    <GridLayout
+        android:id="@+id/puzzle_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="8dp"
+        android:columnCount="4"
+        android:rowCount="4">
+<!--        app:layout_constraintDimensionRatio="1:1"-->
+<!--        android:background="@drawable/puzzle_background"-->
+
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/piece_1"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/piece_2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/piece_3"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/piece_4"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange" />-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/test_piece"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_columnWeight="1"-->
+<!--            android:background="@color/pink_orange"/>-->
+
+    </GridLayout>
+
+<!--    <TableLayout-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginHorizontal="20dp"-->
+<!--        app:layout_constraintDimensionRatio="1:1"-->
+<!--        android:orientation="vertical"-->
+<!--        android:weightSum="3"-->
+<!--        android:background="@drawable/puzzle_background"-->
+<!--        android:padding="4dp">-->
+<!--        <TableRow-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:weightSum="3"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/colorPrimaryDark" />-->
+
+<!--            <ImageButton-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/colorPrimary" />-->
+
+<!--            <ImageButton-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/colorPrimaryDark"/>-->
+
+<!--        </TableRow>-->
+<!--        <TableRow-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:weightSum="3"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/colorPrimary"/>-->
+
+<!--            <ImageButton-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/colorPrimaryDark"/>-->
+
+<!--            <ImageButton-->
+<!--                android:id="@+id/test_piece"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/colorPrimary"/>-->
+
+<!--        </TableRow>-->
+<!--        <TableRow-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:weightSum="3"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@color/transparent">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/colorPrimaryDark"/>-->
+
+<!--            <ImageButton-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@color/colorPrimary"/>-->
+
+<!--&lt;!&ndash;            <ImageButton&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:background="@color/transparent"/>&ndash;&gt;-->
+
+<!--        </TableRow>-->
+<!--    </TableLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
