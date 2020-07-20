@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.GridLayout;
 
 import java.util.Stack;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class PuzzleMatrix {
 
@@ -22,28 +21,36 @@ public class PuzzleMatrix {
     private int pieceWidth;
     private GridLayout puzzleBoard;
 
+    private int frameWidth;
+    private int frameHeight;
+
     private static final long pieceMovetime = 200;
 
 
-    public PuzzleMatrix(int difficulty, Resources resources, Context context, GridLayout puzzleBoard) {
+    public PuzzleMatrix(int difficulty, Resources resources, Context context, GridLayout puzzleBoard,
+                        View rootView, int frameWidth, int frameHeight) {
         this.puzzleBoard = puzzleBoard;
         this.difficulty = difficulty;
+        this.frameWidth = frameWidth;
+        this.frameHeight = frameHeight;
         //minus 1 for open hole at the end
         pieceCount = (difficulty * difficulty) - 1;
-        baseImage = BitmapFactory.decodeResource(resources, R.drawable.sliding_puzzle_test_image);
+        baseImage = BitmapFactory.decodeResource(resources, R.drawable.silicon_chip_test_picture);
+        baseImage = resize(baseImage);
         pieceWidth = baseImage.getWidth() / difficulty;
         pieceHeight = baseImage.getHeight() / difficulty;
-
         puzzlePieces = new PuzzlePiece[difficulty * difficulty];
         puzzleBoard.setColumnCount(difficulty);
         puzzleBoard.setRowCount(difficulty);
         //GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+        PuzzlePiece pTest = null;
         for (int i = 0; i < pieceCount; i++) {
-            PuzzlePiece p = new PuzzlePiece(i, baseImage, (int) (pieceWidth), (int) (pieceHeight), difficulty, context, this);
+            PuzzlePiece p = new PuzzlePiece(i, baseImage, (int) (pieceWidth), (int) (pieceHeight), difficulty, context, this, rootView);
             puzzlePieces[i] = p;
             puzzleBoard.addView(p);
         }
     }
+
 
     public int getDifficulty() {
         return difficulty;
@@ -98,11 +105,6 @@ public class PuzzleMatrix {
         }
         int distance;
         Direction openAdjacentDirection = getOpenAdjacentDirection(pieceLocationIndex);
-        if (openAdjacentDirection == Direction.UP || openAdjacentDirection == Direction.DOWN) {
-            distance = (int) (currentPiece.getHeight());
-        } else {
-            distance = (int) (currentPiece.getWidth());
-        }
         //if no piece open directly adjacent, check pieces in the same row and column
         Stack<PuzzlePiece> piecesToMove = getPiecesToMove(pieceLocationIndex);
         if (piecesToMove == null) {
@@ -110,6 +112,11 @@ public class PuzzleMatrix {
         }
         openAdjacentDirection = getOpenAdjacentDirection(piecesToMove.peek()
                 .getPieceLocationIndex());
+        if (openAdjacentDirection == Direction.UP || openAdjacentDirection == Direction.DOWN) {
+            distance = (int) currentPiece.getPieceHeight();
+        } else {
+            distance = (int) currentPiece.getPieceWidth();
+        }
         while (!piecesToMove.empty()) {
             PuzzlePiece p = piecesToMove.pop();
             if (p.isMoving()) {
@@ -118,6 +125,23 @@ public class PuzzleMatrix {
             movePiece(p, distance, openAdjacentDirection);
         }
 
+    }
+
+    private Bitmap resize(Bitmap bitmap) {
+        int currentBitmapWidth = bitmap.getWidth();
+        int currentBitmapHeight = bitmap.getHeight();
+        Bitmap newBitmap = bitmap;
+        if (currentBitmapWidth > frameWidth) {
+            int newHeight = currentBitmapHeight * frameWidth / currentBitmapWidth;
+            newBitmap = Bitmap.createScaledBitmap(bitmap, frameWidth, newHeight, true);
+            currentBitmapWidth = newBitmap.getWidth();
+            currentBitmapHeight = newBitmap.getHeight();
+        }
+        if (currentBitmapHeight > frameHeight) {
+            int newWidth = currentBitmapWidth * frameHeight / currentBitmapHeight;
+            newBitmap = Bitmap.createScaledBitmap(bitmap, frameWidth, newWidth, true);
+        }
+        return newBitmap;
     }
 
     public boolean isSameRow(int pieceLocationIndex1, int pieceLocationIndex2) {

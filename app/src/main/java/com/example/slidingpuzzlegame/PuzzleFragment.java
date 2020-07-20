@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +58,16 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        difficulty = getArguments().getInt("Difficulty");
+        final GridLayout puzzleBoard = (GridLayout) rootView.findViewById(R.id.puzzle_board);
+        puzzleMatrix = new PuzzleMatrix(difficulty, getResources(), this.getContext(), puzzleBoard,
+                rootView, frameWidth, frameHeight);
+        PuzzlePiece p = puzzleMatrix.getPuzzlePiece(0);
+        int a = p.getWidth();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,18 +76,15 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         final View rootView =
                 inflater.inflate(R.layout.puzzle_fragment, container, false);
         this.rootView = rootView;
-
-
-        difficulty = getArguments().getInt("Difficulty");
-        final GridLayout puzzleBoard = (GridLayout) rootView.findViewById(R.id.puzzle_board);
-        puzzleMatrix = new PuzzleMatrix(difficulty, getResources(), this.getContext(), puzzleBoard);
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        frameWidth = display.getWidth();
+        frameHeight = display.getHeight();
         // Return the View for the fragment's UI.
         return rootView;
     }
 
     public void testMoveClicked() {
     }
-
 
 
     @Override
