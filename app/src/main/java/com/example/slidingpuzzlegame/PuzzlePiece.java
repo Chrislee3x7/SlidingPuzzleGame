@@ -79,6 +79,10 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView im
         return isMoving;
     }
 
+    public void setPieceNumber(int newPieceNumber) {
+        pieceNumber = newPieceNumber;
+    }
+
     public int getPieceNumber() {
         return pieceNumber;
     }

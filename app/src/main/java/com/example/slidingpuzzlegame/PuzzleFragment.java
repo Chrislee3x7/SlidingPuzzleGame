@@ -13,7 +13,9 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,6 +37,8 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     private int frameWidth;
     private Bitmap rootBitmap;
     private int difficulty;
+
+    private Button scrambleButton;
 
     public PuzzleFragment() {
         // Required empty public constructor
@@ -59,14 +63,9 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        difficulty = getArguments().getInt("Difficulty");
-        final GridLayout puzzleBoard = (GridLayout) rootView.findViewById(R.id.puzzle_board);
-        puzzleMatrix = new PuzzleMatrix(difficulty, getResources(), this.getContext(), puzzleBoard,
-                rootView, frameWidth, frameHeight);
-        PuzzlePiece p = puzzleMatrix.getPuzzlePiece(0);
-        int a = p.getWidth();
+    public void onStart() {
+        super.onStart();
+        puzzleMatrix.scramblePuzzle();
     }
 
     @Override
@@ -79,19 +78,25 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         frameWidth = display.getWidth();
         frameHeight = display.getHeight();
+        difficulty = getArguments().getInt("Difficulty");
+        final GridLayout puzzleBoard = (GridLayout) rootView.findViewById(R.id.puzzle_board);
+        puzzleMatrix = new PuzzleMatrix(difficulty, getResources(), this.getContext(), puzzleBoard,
+                rootView, frameWidth, frameHeight);
+
+//        scrambleButton = rootView.findViewById(R.id.scramble_button);
+//        scrambleButton.setOnClickListener(this);
         // Return the View for the fragment's UI.
         return rootView;
     }
 
-    public void testMoveClicked() {
-    }
-
-
     @Override
     public void onClick(View view) {
 //        switch (view.getId()) {
-//            case R.id.test_piece:
-//                //testMoveClicked();
+//            case R.id.scramble_button:
+//                puzzleMatrix.scramblePuzzle();
+////                ViewPropertyAnimator scrambleButtonTestAnimation = scrambleButton.animate();
+////                scrambleButtonTestAnimation.translationXBy(300f);
+////                scrambleButtonTestAnimation.start();
 //                break;
 //        }
     }
