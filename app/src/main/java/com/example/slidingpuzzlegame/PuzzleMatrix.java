@@ -1,12 +1,14 @@
 package com.example.slidingpuzzlegame;
 
 import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.view.animation.AlphaAnimation;
 import android.widget.GridLayout;
 import android.widget.Toast;
 
@@ -24,7 +26,9 @@ public class PuzzleMatrix {
     private int pieceWidth;
     private GridLayout puzzleBoard;
     private Context context;
+    private View rootView;
 
+    private boolean puzzleSolved = false;
     private int frameWidth;
     private int frameHeight;
 
@@ -33,17 +37,23 @@ public class PuzzleMatrix {
 
 
     public PuzzleMatrix(int difficulty, Resources resources, Context context, GridLayout puzzleBoard,
-                        View rootView, int frameWidth, int frameHeight) {
+                        View rootView, int frameWidth, int frameHeight, Bitmap userImage) {
         this.puzzleBoard = puzzleBoard;
         this.difficulty = difficulty;
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
         this.context = context;
+        this.rootView = rootView;
         //minus 1 for open hole at the end
         pieceCount = (difficulty * difficulty) - 1;
         pieceSlots = difficulty * difficulty;
-        baseImage = BitmapFactory.decodeResource(resources, R.drawable.goku_test_image);
-        baseImage = resize(baseImage);
+        if (userImage == null) {
+            this.baseImage = BitmapFactory.decodeResource(resources, R.drawable.goku_test_image);
+        }
+        else {
+            this.baseImage = userImage;
+        }
+        this.baseImage = resize(this.baseImage);
         pieceWidth = baseImage.getWidth() / difficulty;
         pieceHeight = baseImage.getHeight() / difficulty;
         puzzlePieces = new PuzzlePiece[pieceSlots];
@@ -60,6 +70,19 @@ public class PuzzleMatrix {
         }
     }
 
+    public void addFinalPiece() {
+        PuzzlePiece p = new PuzzlePiece(pieceCount, baseImage, (int) (pieceWidth),
+                (int) (pieceHeight), difficulty, context, this, rootView);
+        puzzlePieces[pieceCount] = p;
+        //solvedPuzzlePieces[pieceCount] = p;
+        p.setVisibility(View.INVISIBLE);
+        AlphaAnimation fadeInFinalPiece = new AlphaAnimation(0.0f, 1.0f);
+        puzzleBoard.addView(p);
+        p.setAnimation(fadeInFinalPiece);
+        fadeInFinalPiece.setDuration(1500);
+        fadeInFinalPiece.setFillAfter(true);
+        fadeInFinalPiece.start();
+    }
 
     public int getDifficulty() {
         return difficulty;
@@ -85,6 +108,7 @@ public class PuzzleMatrix {
                 return false;
             }
         }
+        puzzleSolved = true;
         return true;
     }
 
@@ -112,7 +136,7 @@ public class PuzzleMatrix {
 
     public void pieceClicked(int pieceLocationIndex) {
         PuzzlePiece currentPiece = getPuzzlePiece(pieceLocationIndex);
-        if (currentPiece.isMoving()) {
+        if (currentPiece.isMoving() || puzzleSolved) {
             return;
         }
         int distance;
@@ -136,9 +160,6 @@ public class PuzzleMatrix {
             }
             movePiece(p, distance, openAdjacentDirection);
         }
-        if (isSolved()) {
-            playCompletionAnimation();
-        }
 
     }
 
@@ -146,7 +167,7 @@ public class PuzzleMatrix {
         int currentBitmapWidth = bitmap.getWidth();
         int currentBitmapHeight = bitmap.getHeight();
         Bitmap newBitmap = bitmap;
-        if (currentBitmapWidth > frameWidth) {
+        if (currentBitmapWidth != frameWidth) {
             int newHeight = currentBitmapHeight * frameWidth / currentBitmapWidth;
             newBitmap = Bitmap.createScaledBitmap(bitmap, frameWidth, newHeight, true);
             currentBitmapWidth = newBitmap.getWidth();
@@ -154,7 +175,7 @@ public class PuzzleMatrix {
         }
         if (currentBitmapHeight > frameHeight) {
             int newWidth = currentBitmapWidth * frameHeight / currentBitmapHeight;
-            newBitmap = Bitmap.createScaledBitmap(bitmap, frameWidth, newWidth, true);
+            newBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, frameHeight, true);
         }
         return newBitmap;
     }
@@ -261,6 +282,9 @@ public class PuzzleMatrix {
             @Override
             public void onAnimationEnd(Animator animator) {
                 piece.setIsMoving(false);
+                if (isSolved()) {
+                    playCompletionAnimation();
+                }
             }
 
             @Override
@@ -303,11 +327,47 @@ public class PuzzleMatrix {
     }
 
     public void scramblePuzzle() {
-        setAllPuzzleNumbers();
+        //setAllPuzzleNumbers();
         for (int i = 0; i < pieceSlots; i++) {
             swapPieces(i, (int) (Math.random() * pieceSlots));
         }
+        if (!isSolvableState()) {
+            int pieceLocation1 = 0;
+            int pieceLocation2 = 1;
+            if (getPuzzlePiece(pieceLocation1) == null) {
+                pieceLocation1 = 3;
+            } else if (getPuzzlePiece(pieceLocation2) == null) {
+                pieceLocation2 = 3;
+            }
+            swapPieces(pieceLocation1, pieceLocation2);
+        }
         animateScrambleAll();
+    }
+
+    private boolean isSolvableState() {
+        int inversions = 0;
+        for (int i = 0; i < pieceSlots; i++) {
+            PuzzlePiece p1 = getPuzzlePiece(i);
+            if (p1 == null) {
+                if (difficulty % 2 == 0) {
+                    inversions += (difficulty - 1) - (i / difficulty);
+                }
+                continue;
+            }
+            int puzzleNumber1 = p1.getPieceNumber();
+            for (int j = i; j < pieceSlots; j++) {
+                PuzzlePiece p2 = getPuzzlePiece(j);
+                if (p2 == null) {
+                    continue;
+                }
+                int puzzleNumber2 = p2.getPieceNumber();
+                if (puzzleNumber1 > puzzleNumber2) {
+                    inversions++;
+                }
+            }
+        }
+        return inversions % 2 == 0;
+
     }
 
     public void setAllPuzzleNumbers() {
@@ -319,21 +379,37 @@ public class PuzzleMatrix {
         }
     }
 
-    public void animateLinearMove(PuzzlePiece piece1, int newLocation) {
+    public void animateLinearMove(final PuzzlePiece piece1, int newLocation) {
         int originalLocation = piece1.getPieceNumber();
         int distanceX = ((newLocation % difficulty) - (originalLocation % difficulty)) * pieceWidth;
         int distanceY = ((newLocation / difficulty) - (originalLocation / difficulty)) * pieceHeight;
-        int finalPositionX = piece1.getLeft() + distanceX;
-        int finalPositionY = piece1.getTop() + distanceY;
-//        final SpringAnimation moveX = new SpringAnimation(piece1, DynamicAnimation.TRANSLATION_X, finalPositionX);
-//        final SpringAnimation moveY = new SpringAnimation(piece1, DynamicAnimation.TRANSLATION_Y, finalPositionY);
-//        moveX.animateToFinalPosition(finalPositionX);
-//        moveY.animateToFinalPosition(finalPositionY);
 
         ViewPropertyAnimator linearScrambleMove = piece1.animate();
         linearScrambleMove.translationXBy(distanceX);
         linearScrambleMove.translationYBy(distanceY);
         linearScrambleMove.setDuration(pieceScrambleTime);
+        piece1.setIsMoving(true);
+        linearScrambleMove.setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                piece1.setIsMoving(false);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
         linearScrambleMove.start();
         //piece1.requestFocus();
     }
@@ -350,7 +426,7 @@ public class PuzzleMatrix {
         for (int i = 0; i < pieceSlots; i++) {
             PuzzlePiece piece = solvedPuzzlePieces[i];
             if (piece == null) {
-                break;
+                continue;
             }
             int newLocation = piece.getPieceLocationIndex();
             animateLinearMove(piece, newLocation);
@@ -359,6 +435,7 @@ public class PuzzleMatrix {
 
     public void playCompletionAnimation() {
         //for now, just a toast
+        addFinalPiece();
         Toast.makeText(context, "Congratulations", Toast.LENGTH_SHORT).show();
         //make final puzzle piece fade in
         //then whole puzzle blinks

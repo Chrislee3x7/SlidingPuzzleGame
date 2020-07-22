@@ -11,17 +11,16 @@
         android:id="@+id/puzzle_board"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:background="@color/white"
+        android:padding="3dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginHorizontal="14dp"
+        android:background="@drawable/puzzle_background"
         android:columnCount="4"
         android:rowCount="4">
 <!--        app:layout_constraintDimensionRatio="1:1"-->
-<!--        android:background="@drawable/puzzle_background"-->
 
     </GridLayout>
 

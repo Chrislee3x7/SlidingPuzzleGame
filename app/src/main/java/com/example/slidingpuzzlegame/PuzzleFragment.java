@@ -1,13 +1,16 @@
 package com.example.slidingpuzzlegame;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Picture;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -19,6 +22,8 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,8 +42,7 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     private int frameWidth;
     private Bitmap rootBitmap;
     private int difficulty;
-
-    private Button scrambleButton;
+    private Uri selectedImage;
 
     public PuzzleFragment() {
         // Required empty public constructor
@@ -79,9 +83,21 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         frameWidth = display.getWidth();
         frameHeight = display.getHeight();
         difficulty = getArguments().getInt("Difficulty");
+        Bitmap bitmap = null;
+        if (getArguments().getSerializable("Selected Image") == null) {
+            selectedImage = null;
+        } else {
+            selectedImage = Uri.parse(getArguments().getSerializable("Selected Image").toString());
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                //input null
+            }
+        }
+
         final GridLayout puzzleBoard = (GridLayout) rootView.findViewById(R.id.puzzle_board);
         puzzleMatrix = new PuzzleMatrix(difficulty, getResources(), this.getContext(), puzzleBoard,
-                rootView, frameWidth, frameHeight);
+                rootView, frameWidth, frameHeight, bitmap);
 
 //        scrambleButton = rootView.findViewById(R.id.scramble_button);
 //        scrambleButton.setOnClickListener(this);
@@ -92,12 +108,7 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 //        switch (view.getId()) {
-//            case R.id.scramble_button:
-//                puzzleMatrix.scramblePuzzle();
-////                ViewPropertyAnimator scrambleButtonTestAnimation = scrambleButton.animate();
-////                scrambleButtonTestAnimation.translationXBy(300f);
-////                scrambleButtonTestAnimation.start();
-//                break;
+//
 //        }
     }
 }
