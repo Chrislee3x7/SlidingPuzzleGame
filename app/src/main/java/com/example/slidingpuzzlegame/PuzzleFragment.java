@@ -1,29 +1,25 @@
 package com.example.slidingpuzzlegame;
 
-import android.animation.ObjectAnimator;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Picture;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.provider.MediaStore;
-import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
-import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +39,17 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     private Bitmap rootBitmap;
     private int difficulty;
     private Uri selectedImage;
+
+
+    //movecount stuff
+    private TextView movecount;
+    private int numberOfMoves = 0;
+
+    //timer stuff
+    private TextView stopwatch;
+    private int seconds = 0;
+    private boolean running = false;
+    private boolean paused = false;
 
     public PuzzleFragment() {
         // Required empty public constructor
@@ -69,6 +76,81 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //only set to paused = true if was running before onPause was called
+        paused = running;
+        running = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (paused) {
+            running = true;
+        }
+    }
+
+    public void runStopwatch()
+    {
+        // Creates a new Handler
+        final Handler handler = new Handler();
+
+        // Call the post() method, passing in a new Runnable. The post() method processes
+        // code without a delay, so the code in the Runnable will run almost immediately.
+        handler.post(new Runnable() {
+            @Override
+
+            public void run()
+            {
+                int hours = seconds / 3600;
+                int minutes = (seconds % 3600) / 60;
+                int secs = seconds % 60;
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                String time = String.format(Locale.getDefault(),
+                        "%d:%02d:%02d", hours, minutes, secs);
+                // Set the text view text.
+                stopwatch.setText(time);
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    seconds++;
+                }
+                // Post the code again
+                // with a delay of 1 second.
+                handler.postDelayed(this, 1000);
+            }
+        });
+    }
+
+    public boolean stopwatchIsRunning() {
+        return running;
+    }
+
+    public void pauseStopwatch() {
+        running = false;
+    }
+
+    public void startStopwatch() {
+        running = true;
+        runStopwatch();
+    }
+
+    public void countOneMove() {
+        if (numberOfMoves == 0) {
+            movecount.setVisibility(View.VISIBLE);
+        }
+        numberOfMoves++;
+        movecount.setText(String.valueOf(numberOfMoves));
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         puzzleMatrix.scramblePuzzle();
     }
 
@@ -97,8 +179,10 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
 
         final GridLayout puzzleBoard = (GridLayout) rootView.findViewById(R.id.puzzle_board);
         puzzleMatrix = new PuzzleMatrix(difficulty, getResources(), this.getContext(), puzzleBoard,
-                rootView, frameWidth, frameHeight, bitmap);
+                rootView, frameWidth, frameHeight, bitmap, this);
 
+        stopwatch = (TextView) rootView.findViewById(R.id.stopwatch_display);
+        movecount = (TextView) rootView.findViewById(R.id.movecount_display);
 //        scrambleButton = rootView.findViewById(R.id.scramble_button);
 //        scrambleButton.setOnClickListener(this);
         // Return the View for the fragment's UI.

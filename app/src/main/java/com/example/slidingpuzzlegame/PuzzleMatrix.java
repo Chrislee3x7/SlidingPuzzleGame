@@ -1,20 +1,23 @@
 package com.example.slidingpuzzlegame;
 
 import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Stack;
 
-public class PuzzleMatrix {
+public class PuzzleMatrix implements View.OnClickListener {
 
     private PuzzlePiece[] puzzlePieces;
     private PuzzlePiece[] solvedPuzzlePieces;
@@ -25,32 +28,41 @@ public class PuzzleMatrix {
     private int pieceHeight;
     private int pieceWidth;
     private GridLayout puzzleBoard;
+    private PuzzleFragment puzzleFragment;
     private Context context;
     private View rootView;
+    private ImageView sheenEffect;
 
     private boolean puzzleSolved = false;
+    private boolean finalPieceAdded = false;
     private int frameWidth;
     private int frameHeight;
 
     private static final long pieceMoveTime = 200;
     private static final long pieceScrambleTime = 500;
+    private static final int horizontalMargin = 16;
+    private static final int verticalStopwatchMarginAndBoardMargin = 350;
 
 
     public PuzzleMatrix(int difficulty, Resources resources, Context context, GridLayout puzzleBoard,
-                        View rootView, int frameWidth, int frameHeight, Bitmap userImage) {
+                        View rootView, int frameWidth, int frameHeight, Bitmap userImage,
+                        PuzzleFragment puzzleFragment) {
         this.puzzleBoard = puzzleBoard;
         this.difficulty = difficulty;
-        this.frameWidth = frameWidth;
-        this.frameHeight = frameHeight;
+        this.frameWidth = frameWidth - horizontalMargin;
+        this.frameHeight = frameHeight - verticalStopwatchMarginAndBoardMargin;
         this.context = context;
         this.rootView = rootView;
+        this.puzzleFragment = puzzleFragment;
+        sheenEffect = rootView.findViewById(R.id.sheen_effect);
+
+        rootView.findViewById(R.id.scramble_button).setOnClickListener(this);
         //minus 1 for open hole at the end
         pieceCount = (difficulty * difficulty) - 1;
         pieceSlots = difficulty * difficulty;
         if (userImage == null) {
             this.baseImage = BitmapFactory.decodeResource(resources, R.drawable.goku_test_image);
-        }
-        else {
+        } else {
             this.baseImage = userImage;
         }
         this.baseImage = resize(this.baseImage);
@@ -77,11 +89,30 @@ public class PuzzleMatrix {
         //solvedPuzzlePieces[pieceCount] = p;
         p.setVisibility(View.INVISIBLE);
         AlphaAnimation fadeInFinalPiece = new AlphaAnimation(0.0f, 1.0f);
+        fadeInFinalPiece.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                performSheenEffect();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         puzzleBoard.addView(p);
         p.setAnimation(fadeInFinalPiece);
-        fadeInFinalPiece.setDuration(1500);
-        fadeInFinalPiece.setFillAfter(true);
+        fadeInFinalPiece.setDuration(1800);
+        fadeInFinalPiece.setFillAfter(false);
         fadeInFinalPiece.start();
+        SoundPlayer.playHollowShimmerSound(context);
+        p.setVisibility(View.VISIBLE);
+        finalPieceAdded = true;
     }
 
     public int getDifficulty() {
@@ -146,6 +177,9 @@ public class PuzzleMatrix {
         if (piecesToMove == null) {
             return;
         }
+        if (!puzzleFragment.stopwatchIsRunning()) {
+            puzzleFragment.startStopwatch();
+        }
         openAdjacentDirection = getOpenAdjacentDirection(piecesToMove.peek()
                 .getPieceLocationIndex());
         if (openAdjacentDirection == Direction.UP || openAdjacentDirection == Direction.DOWN) {
@@ -176,7 +210,12 @@ public class PuzzleMatrix {
         if (currentBitmapHeight > frameHeight) {
             int newWidth = currentBitmapWidth * frameHeight / currentBitmapHeight;
             newBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, frameHeight, true);
+            currentBitmapWidth = newBitmap.getWidth();
+            currentBitmapHeight = newBitmap.getHeight();
         }
+        frameWidth = currentBitmapWidth;
+        frameHeight = currentBitmapHeight;
+
         return newBitmap;
     }
 
@@ -271,6 +310,7 @@ public class PuzzleMatrix {
             //basically if animation for this piece is still going
             return;
         }
+        puzzleFragment.countOneMove();
         piece.setIsMoving(true);
         ViewPropertyAnimator translate = piece.animate();
         translate.setListener(new Animator.AnimatorListener() {
@@ -434,13 +474,40 @@ public class PuzzleMatrix {
     }
 
     public void playCompletionAnimation() {
-        //for now, just a toast
+        if (finalPieceAdded) {
+            return;
+        }
+        puzzleFragment.pauseStopwatch();
         addFinalPiece();
+        //for now, just a toast
         Toast.makeText(context, "Congratulations", Toast.LENGTH_SHORT).show();
         //make final puzzle piece fade in
         //then whole puzzle blinks
         //maybe some sound
         //open finish screen fragment
         //  has time, and moves taken.
+    }
+
+    public void performSheenEffect() {
+        sheenEffect.getLayoutParams().width = frameWidth;
+        sheenEffect.getLayoutParams().height = frameHeight;
+        TranslateAnimation animation = new TranslateAnimation
+                (-frameWidth, (frameWidth + sheenEffect.getWidth()), 0, 0);
+        animation.setDuration(1000);
+        animation.setFillAfter(false);
+        animation.setInterpolator(new AccelerateDecelerateInterpolator());
+        sheenEffect.setVisibility(View.INVISIBLE);
+        sheenEffect.startAnimation(animation);
+        SoundPlayer.playSheenSound(context);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.scramble_button:
+                performSheenEffect();
+                break;
+
+        }
     }
 }
