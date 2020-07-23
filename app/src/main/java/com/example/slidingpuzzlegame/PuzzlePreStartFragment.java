@@ -131,21 +131,26 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cancel_button:
+                SoundPlayer.playBacktrackClick(getContext());
                 //close this fragment and go back to main menu/home
+                ((MainActivity) getActivity()).showMainMenu();
                 close();
                 break;
             case R.id.confirm_button:
+                SoundPlayer.playLiquidDropClick(getContext());
                 //close this fragment and go to the puzzle of the specified info
                 int difficulty = Integer.parseInt((Character.toString(difficultyDropdown.getSelectedItem().toString().charAt(0))));
                 openPuzzleFragment(difficulty);
                 close();
                 break;
             case R.id.choose_photo_button:
+                SoundPlayer.playLiquidDropClick(getContext());
                 Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 startActivityForResult(gallery, PICK_IMAGE);
                 break;
 
             case R.id.take_photo_button:
+                SoundPlayer.playLiquidDropClick(getContext());
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);

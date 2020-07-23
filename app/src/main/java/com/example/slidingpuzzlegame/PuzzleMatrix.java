@@ -175,8 +175,10 @@ public class PuzzleMatrix implements View.OnClickListener {
         //if no piece open directly adjacent, check pieces in the same row and column
         Stack<PuzzlePiece> piecesToMove = getPiecesToMove(pieceLocationIndex);
         if (piecesToMove == null) {
+            SoundPlayer.playHardRefuseClick(context);
             return;
         }
+        SoundPlayer.playGlassClick(context);
         if (!puzzleFragment.stopwatchIsRunning()) {
             puzzleFragment.startStopwatch();
         }

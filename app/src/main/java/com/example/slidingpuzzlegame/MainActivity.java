@@ -1,5 +1,6 @@
 package com.example.slidingpuzzlegame;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openPreStartFragment(View view) {
+        SoundPlayer.playLiquidDropClick(this);
         playButton.setVisibility(View.GONE);
         //playButton.setEnabled(false);
         // Create a new Fragment to be placed in the activity layout
@@ -32,7 +34,17 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.activity_main, puzzlePreStartFragment).commit();
     }
 
-//    public void closePreStartFragment(View view) {
+    public void showMainMenu() {
+        playButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //playButton.setVisibility(View.VISIBLE);
+    }
+
+    //    public void closePreStartFragment(View view) {
 //        playButton.setVisibility(View.GONE);
 //        //playButton.setEnabled(false);
 //        getSupportFragmentManager().beginTransaction().remove(puzzlePreStartFragment).commit();
