@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/play_button_background"/>
+        android:background="@drawable/stopwatch_background"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

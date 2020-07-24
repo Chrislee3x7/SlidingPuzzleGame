@@ -1,7 +1,5 @@
 package com.example.slidingpuzzlegame;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -19,11 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -68,13 +63,22 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     private TextView endScreenMovecount;
     private TextView endScreenTimeBest;
     private TextView endScreenMovecountBest;
-    private ImageButton statsButton;
-    private ImageButton homeButton;
-    private ImageButton retryButton;
+    private ImageButton endScreenStatsButton;
+    private ImageButton endScreenHomeButton;
+    private ImageButton endScreenRetryButton;
 
 
     private String bestTime;
     private String bestMoveCount;
+
+    //pause stuff
+    private LinearLayout pauseMenu;
+    private ImageButton pauseButton;
+    private Button pauseMenuRetryButton;
+    private Button pauseMenuGiveUpButton;
+    private Button pauseMenuStatsButton;
+    private Button pauseMenuOptionsButton;
+    private View darkenBackground;
 
     private SharedPreferences sharedPreferences;
 
@@ -132,12 +136,20 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     }
 
     public void pauseStopwatch() {
+        //only set to paused = true if was running before onPause was called
+        paused = running;
         running = false;
     }
 
     public void startStopwatch() {
         running = true;
         runStopwatch();
+    }
+
+    public void resumeStopwatch() {
+        if (paused) {
+            running = true;
+        }
     }
 
     public void countOneMove() {
@@ -151,6 +163,8 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     public void puzzleEnd(boolean successful) {
         stopwatch.setVisibility(View.INVISIBLE);
         movecount.setVisibility(View.INVISIBLE);
+        pauseButton.setVisibility(View.INVISIBLE);
+        darkenBackground.setClickable(false);
         String currentTime = stopwatch.getText().toString();
         String currentMovecount = movecount.getText().toString();
         if (!successful) {
@@ -165,8 +179,7 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
                 endScreenTimeBest.setText(currentTime);
                 editor.putString("Best Time" + difficulty, stopwatch.getText().toString());
                 editor.apply();
-            }
-            else {
+            } else {
                 setBestTime = bestTime;
             }
             String setBestMovecount = null;
@@ -174,13 +187,13 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
                 setBestMovecount = currentMovecount;
                 editor.putInt("Best Movecount" + difficulty, Integer.parseInt(movecount.getText().toString()));
                 editor.apply();
-            }
-            else {
+            } else {
                 setBestMovecount = bestMoveCount;
             }
             endScreenTimeBest.setText(setBestTime);
             endScreenMovecountBest.setText(setBestMovecount);
         }
+        darkenBackground.setVisibility(View.VISIBLE);
         endScreen.setVisibility(View.VISIBLE);
 
 
@@ -245,8 +258,7 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     public void onPause() {
         super.onPause();
         //only set to paused = true if was running before onPause was called
-        paused = running;
-        running = false;
+        pauseStopwatch();
     }
 
     @Override
@@ -296,15 +308,32 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         endScreenMovecount = (TextView) rootView.findViewById(R.id.end_screen_movecount);
         endScreenTimeBest = (TextView) rootView.findViewById(R.id.end_screen_time_best);
         endScreenMovecountBest = (TextView) rootView.findViewById(R.id.end_screen_movecount_best);
-        homeButton = (ImageButton) rootView.findViewById(R.id.home_button);
-        homeButton.setOnClickListener(this);
-        retryButton = (ImageButton) rootView.findViewById(R.id.retry_button);
-        retryButton.setOnClickListener(this);
-        statsButton = (ImageButton) rootView.findViewById(R.id.stats_button);
-        statsButton.setOnClickListener(this);
+        endScreenHomeButton = (ImageButton) rootView.findViewById(R.id.home_button);
+        endScreenHomeButton.setOnClickListener(this);
+        endScreenRetryButton = (ImageButton) rootView.findViewById(R.id.retry_button);
+        endScreenRetryButton.setOnClickListener(this);
+        endScreenStatsButton = (ImageButton) rootView.findViewById(R.id.stats_button);
+        endScreenStatsButton.setOnClickListener(this);
         sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+
+        darkenBackground = rootView.findViewById(R.id.darken_background);
         bestTime = getBestTime();
         bestMoveCount = getBestMovecount();
+
+        //pause menu stuff
+        pauseMenu = (LinearLayout) rootView.findViewById(R.id.pause_menu);
+        pauseButton = (ImageButton) rootView.findViewById(R.id.pause_button);
+        pauseButton.setOnClickListener(this);
+        pauseMenuRetryButton = (Button) rootView.findViewById(R.id.pause_menu_retry_button);
+        pauseMenuRetryButton.setOnClickListener(this);
+        pauseMenuGiveUpButton = (Button) rootView.findViewById(R.id.pause_menu_give_up_button);
+        pauseMenuGiveUpButton.setOnClickListener(this);
+        pauseMenuStatsButton = (Button) rootView.findViewById(R.id.pause_menu_stats_button);
+        pauseMenuStatsButton.setOnClickListener(this);
+        pauseMenuOptionsButton = (Button) rootView.findViewById(R.id.pause_menu_options_button);
+        pauseMenuOptionsButton.setOnClickListener(this);
+        darkenBackground = rootView.findViewById(R.id.darken_background);
+        darkenBackground.setOnClickListener(this);
 
         //        scrambleButton = rootView.findViewById(R.id.scramble_button);
 //        scrambleButton.setOnClickListener(this);
@@ -322,6 +351,7 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.stats_button:
                 SoundPlayer.playLiquidDropClick(getContext());
+                openStatisticsFragment();
                 break;
             case R.id.home_button:
                 //close this fragment and return to start screen
@@ -333,12 +363,60 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
                 SoundPlayer.playLiquidDropClick(getContext());
                 //reload the same puzzle with another scramble
                 //close this fragment
-                MainActivity mainActivity = ((MainActivity)getActivity());
+                MainActivity mainActivity = ((MainActivity) getActivity());
                 mainActivity.openPreStartFragment();
 //                PuzzlePreStartFragment puzzlePreStartFragment = mainActivity.getPreStartFragment();
 //                puzzlePreStartFragment.openPuzzleFragment(difficulty);
                 close();
                 break;
+
+
+            case R.id.pause_button:
+                SoundPlayer.playLiquidDropClick(getContext());
+                pauseStopwatch();
+                darkenBackground.setVisibility(View.VISIBLE);
+                puzzleMatrix.setMovementLocked(true);
+                pauseMenu.setVisibility(View.VISIBLE);
+                break;
+            case R.id.pause_menu_give_up_button:
+                SoundPlayer.playLiquidDropClick(getContext());
+                darkenBackground.setVisibility(View.GONE);
+                pauseMenu.setVisibility(View.GONE);
+                puzzleEnd(false);
+                break;
+            case R.id.pause_menu_retry_button:
+                SoundPlayer.playLiquidDropClick(getContext());
+                darkenBackground.setVisibility(View.INVISIBLE);
+                pauseMenu.setVisibility(View.GONE);
+                //implement retry
+                break;
+            case R.id.pause_menu_stats_button:
+                SoundPlayer.playLiquidDropClick(getContext());
+                openStatisticsFragment();
+                //dont need to close the pausemenu
+                break;
+            case R.id.pause_menu_options_button:
+                SoundPlayer.playLiquidDropClick(getContext());
+                //also do not need to close the pause menue also do not need to darken background
+                break;
+            case R.id.darken_background:
+                SoundPlayer.playLiquidDropClick(getContext());
+                darkenBackground.setVisibility(View.INVISIBLE);
+                puzzleMatrix.setMovementLocked(false);
+                pauseMenu.setVisibility(View.GONE);
+                resumeStopwatch();
+
         }
+    }
+
+    public void openStatisticsFragment() {
+        // Create a new Fragment to be placed in the activity layout
+        final StatisticsFragment statisticsFragment = new StatisticsFragment();
+        // In case this activity was started with special instructions from an
+        // Intent, pass the Intent's extras to the fragment as arguments
+        //statisticsFragment.setArguments(getActivity().getIntent().getExtras());
+        // Add the fragment to the 'fragment_container' FrameLayout
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .add(R.id.activity_main, statisticsFragment).commit();
     }
 }

@@ -17,30 +17,29 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
 
-            
             <TextView
                 android:id="@+id/movecount_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/stopwatch_background"
+                android:background="@drawable/play_button_background"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
-                android:visibility="invisible"
                 android:text="0"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:visibility="invisible" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/stopwatch_display"
@@ -48,12 +47,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/stopwatch_background"
+                android:background="@drawable/play_button_background"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
                 android:text="0:00:00"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
+
+            <ImageButton
+                android:id="@+id/pause_button"
+                android:layout_marginHorizontal="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stopwatch_background"
+                android:src="@drawable/ic_settings"/>
 
         </LinearLayout>
 
@@ -97,108 +104,123 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+    <View
+        android:id="@+id/darken_background"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/darkened_background" />
+
     <LinearLayout
         android:id="@+id/end_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/play_button_background"
         android:orientation="vertical"
+        android:layout_marginHorizontal="50dp"
         android:paddingHorizontal="30dp"
         android:paddingVertical="30dp"
-        android:background="@drawable/play_button_background"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/end_screen_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/default_end_screen_title"
-            android:textSize="35dp"
-            android:textAllCaps="false"
-            android:textStyle="bold"
             android:layout_gravity="center"
-            android:textColor="@color/black"/>
+            android:text="@string/default_end_screen_title"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/end_screen_difficulty_display"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textAlignment="center"
             android:paddingTop="10dp"
-            android:textSize="25dp"
             android:text="3 x 3"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            />
+            android:textSize="25dp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginHorizontal="5dp"
-            android:background="@color/black"/>
+            android:background="@color/black" />
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:paddingTop="5dp"
             android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_marginHorizontal="10dp"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
 
             <TableRow>
+
                 <TextView
                     android:paddingTop="0dp"
                     android:text="Time:"
+                    android:textColor="@color/black"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textStyle="bold" />
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
+
                 <TextView
                     android:id="@+id/end_screen_time"
                     android:paddingTop="0dp"
                     android:text="@string/default_time_value"
-                    android:textSize="20dp"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="20dp" />
             </TableRow>
 
             <TableRow>
+
                 <TextView
                     android:paddingTop="0dp"
                     android:text="Best:"
-                    android:textSize="18dp"
                     android:textAlignment="viewEnd"
-                    android:textStyle="italic"/>
+                    android:textSize="18dp"
+                    android:textStyle="italic" />
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
+
                 <TextView
                     android:id="@+id/end_screen_time_best"
                     android:paddingTop="0dp"
                     android:text="@string/default_time_value"
-                    android:textSize="18dp"
                     android:textAlignment="viewEnd"
-                    android:textStyle="italic"/>
+                    android:textSize="18dp"
+                    android:textStyle="italic" />
             </TableRow>
 
             <TableRow>
+
                 <TextView
                     android:paddingTop="10dp"
                     android:text="Movecount:"
+                    android:textColor="@color/black"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textStyle="bold" />
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/end_screen_movecount"
@@ -211,66 +233,172 @@
             </TableRow>
 
             <TableRow>
+
                 <TextView
                     android:paddingTop="0dp"
                     android:text="Best:"
-                    android:textSize="18dp"
                     android:textAlignment="viewEnd"
-                    android:textStyle="italic"/>
+                    android:textSize="18dp"
+                    android:textStyle="italic" />
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
+
                 <TextView
                     android:id="@+id/end_screen_movecount_best"
                     android:paddingTop="0dp"
                     android:text="@string/default_movecount_value"
-                    android:textSize="18dp"
                     android:textAlignment="viewEnd"
-                    android:textStyle="italic"/>
+                    android:textSize="18dp"
+                    android:textStyle="italic" />
             </TableRow>
 
         </TableLayout>
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="10dp"
-            android:paddingTop="20dp">
+            android:paddingTop="20dp"
+            android:layout_gravity="center">
+
             <ImageButton
                 android:id="@+id/stats_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:layout_gravity="left"
-                android:src="@drawable/ic_bar_chart"
                 android:background="@drawable/stopwatch_background"
-                />
+                android:padding="5dp"
+                android:src="@drawable/ic_bar_chart" />
+
             <Space
-                android:layout_width="0dp"
+                android:layout_width="20dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <ImageButton
                 android:id="@+id/home_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@drawable/ic_home"
                 android:background="@drawable/stopwatch_background"
-                />
+                android:padding="5dp"
+                android:src="@drawable/ic_home" />
+
             <Space
-                android:layout_width="0dp"
+                android:layout_width="20dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <ImageButton
                 android:id="@+id/retry_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:layout_gravity="right"
-                android:src="@drawable/ic_refresh"
                 android:background="@drawable/stopwatch_background"
-                />
+                android:padding="5dp"
+                android:src="@drawable/ic_refresh" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pause_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/play_button_background"
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="30dp"
+        android:visibility="gone"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/pause_menu_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Game Paused"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="0dp"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
+
+            <Button
+                android:id="@+id/pause_menu_retry_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/stopwatch_background"
+                android:drawableStart="@drawable/ic_refresh_mini"
+                android:padding="5dp"
+                android:text="@string/retry"
+                android:textAllCaps="false"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/pause_menu_give_up_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/stopwatch_background"
+                android:drawableStart="@drawable/ic_home_mini"
+                android:padding="5dp"
+                android:text="@string/give_up"
+                android:textAllCaps="false"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/pause_menu_stats_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/stopwatch_background"
+                android:drawableStart="@drawable/ic_bar_chart_mini"
+                android:padding="5dp"
+                android:text="@string/statistics"
+                android:textAllCaps="false"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/pause_menu_options_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/stopwatch_background"
+                android:drawableStart="@drawable/ic_settings_mini"
+                android:padding="5dp"
+                android:text="@string/options"
+                android:textAllCaps="false"
+                android:textSize="20dp" />
+
+<!--            <Button-->
+<!--                android:id="@+id/pause_menu_back_button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginVertical="5dp"-->
+<!--                android:background="@drawable/stopwatch_background"-->
+<!--                android:drawableStart="@drawable/ic_navigate_before_mini"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="@string/back"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textSize="20dp" />-->
+
+
         </LinearLayout>
     </LinearLayout>
 

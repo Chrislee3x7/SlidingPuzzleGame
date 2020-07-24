@@ -9,4 +9,5 @@
     <color name="warm_orange">#E28855</color>
     <color name="red_orange">#C63D2B</color>
     <color name="black">#000000</color>
+    <color name="darkened_background">#99000000</color>
 </resources>

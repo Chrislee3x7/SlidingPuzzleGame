@@ -9,6 +9,11 @@
     <string name="default_time_value">––:––:––</string>
     <string name="default_movecount_value">–</string>
     <string name="default_end_screen_title">Congratulations!</string>
+    <string name="give_up">Give Up</string>
+    <string name="statistics">Statistics</string>
+    <string name="retry">Retry</string>
+    <string name="options">Options</string>
+    <string name="back">Back</string>
     <string-array name="difficulty_choices">
         <item>3 x 3</item>
         <item>2 x 2</item>

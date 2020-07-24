@@ -8,22 +8,22 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df4806f6-5214-4637-8865-6bc33783fe34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_bar_chart.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_check.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_close.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_home.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_refresh.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/round_button.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/bar_chart_24px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/check_24px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/close_24px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/home_24px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/refresh_24px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/sparky_click.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/StatisticsFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_back_mini.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_bar_chart_mini.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_home_mini.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_navigate_before_mini.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_refresh_mini.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_settings_mini.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_statistics.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/arrow_back.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/navigate_before.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/settings_24px.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -34,14 +34,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleMatrix.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePreStartFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePreStartFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/SoundPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/SoundPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/play_button_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/play_button_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/stopwatch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/stopwatch_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/puzzle_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/puzzle_background.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_puzzle_pre_start.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_puzzle_pre_start.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/puzzle_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/puzzle_fragment.xml" afterDir="false" />
@@ -69,10 +70,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
         <option value="Enum" />
         <option value="Class" />
         <option value="resourceFile" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -185,10 +186,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="728" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1595557832993">
+    <state x="728" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1595573749514">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="728" y="128" key="#com.intellij.ide.util.MemberChooser/0.23.1280.777@0.23.1280.777" timestamp="1595557832993" />
+    <state x="728" y="128" key="#com.intellij.ide.util.MemberChooser/0.23.1280.777@0.23.1280.777" timestamp="1595573749514" />
     <state x="378" y="165" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595131853848">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -201,30 +202,30 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="228" y="173" key="AndroidCreateResourceFileDialog/0.23.1280.777@0.23.1280.777" timestamp="1594689707773" />
-    <state x="499" y="266" key="AndroidCreateXmlResourceDialog" timestamp="1595549670367">
+    <state x="499" y="266" key="AndroidCreateXmlResourceDialog" timestamp="1595561927053">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="499" y="266" key="AndroidCreateXmlResourceDialog/0.23.1280.777@0.23.1280.777" timestamp="1595549670367" />
+    <state x="499" y="266" key="AndroidCreateXmlResourceDialog/0.23.1280.777@0.23.1280.777" timestamp="1595561927053" />
     <state x="503" y="184" key="AndroidProcessChooserDialog" timestamp="1595279404461">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="503" y="184" key="AndroidProcessChooserDialog/0.23.1280.777@0.23.1280.777" timestamp="1595279404461" />
-    <state width="1238" height="305" key="GridCell.Tab.0.bottom" timestamp="1595556050728">
+    <state width="1238" height="197" key="GridCell.Tab.0.bottom" timestamp="1595568988904">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1595556050728" />
-    <state width="1238" height="305" key="GridCell.Tab.0.center" timestamp="1595556050727">
+    <state width="1238" height="197" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1595568988904" />
+    <state width="1238" height="197" key="GridCell.Tab.0.center" timestamp="1595568988903">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1595556050727" />
-    <state width="1238" height="305" key="GridCell.Tab.0.left" timestamp="1595556050726">
+    <state width="1238" height="197" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1595568988903" />
+    <state width="1238" height="197" key="GridCell.Tab.0.left" timestamp="1595568988903">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1595556050726" />
-    <state width="1238" height="305" key="GridCell.Tab.0.right" timestamp="1595556050727">
+    <state width="1238" height="197" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1595568988903" />
+    <state width="1238" height="197" key="GridCell.Tab.0.right" timestamp="1595568988904">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1595556050727" />
+    <state width="1238" height="197" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1595568988904" />
     <state width="1238" height="305" key="GridCell.Tab.1.bottom" timestamp="1595556050730">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -249,9 +250,9 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="306" y="168" width="667" height="486" key="find.popup/0.23.1280.777@0.23.1280.777" timestamp="1594597776157" />
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1595557087419">
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1595567369967">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.23.1280.777@0.23.1280.777" timestamp="1595557087419" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.23.1280.777@0.23.1280.777" timestamp="1595567369967" />
   </component>
 </project>

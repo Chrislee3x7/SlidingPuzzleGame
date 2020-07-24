@@ -43,6 +43,9 @@ public class PuzzleMatrix implements View.OnClickListener {
     private static final int horizontalMargin = 16;
     private static final int verticalStopwatchMarginAndBoardMargin = 350;
 
+    //for when game is paused and basically when game is not in foreground;
+    private boolean movementLocked = false;
+
 
     public PuzzleMatrix(int difficulty, Resources resources, Context context, GridLayout puzzleBoard,
                         View rootView, int frameWidth, int frameHeight, Bitmap userImage,
@@ -167,7 +170,7 @@ public class PuzzleMatrix implements View.OnClickListener {
 
     public void pieceClicked(int pieceLocationIndex) {
         PuzzlePiece currentPiece = getPuzzlePiece(pieceLocationIndex);
-        if (currentPiece.isMoving() || puzzleSolved) {
+        if (currentPiece.isMoving() || puzzleSolved || movementLocked) {
             return;
         }
         int distance;
@@ -482,12 +485,16 @@ public class PuzzleMatrix implements View.OnClickListener {
         puzzleFragment.pauseStopwatch();
         addFinalPiece();
         //for now, just a toast
-        Toast.makeText(context, "Congratulations", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Congratulations", Toast.LENGTH_SHORT).show();
         //make final puzzle piece fade in
         //then whole puzzle blinks
         //maybe some sound
         //open finish screen fragment
         //  has time, and moves taken.
+    }
+
+    public void setMovementLocked(boolean movementLocked) {
+        this.movementLocked = movementLocked;
     }
 
     public void performSheenEffect() {

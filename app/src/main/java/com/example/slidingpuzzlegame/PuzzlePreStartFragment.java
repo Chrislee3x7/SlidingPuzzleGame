@@ -133,7 +133,7 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cancel_button:
-                SoundPlayer.playBacktrackClick(getContext());
+                SoundPlayer.playLiquidDropClick(getContext());
                 //close this fragment and go back to main menu/home
                 ((MainActivity) getActivity()).showMainMenu();
                 close();
