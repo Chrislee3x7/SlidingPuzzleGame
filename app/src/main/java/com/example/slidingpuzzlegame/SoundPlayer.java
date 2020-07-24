@@ -7,43 +7,85 @@ public class SoundPlayer {
 
     public static void playSheenSound(Context context) {
 
-        MediaPlayer sound = MediaPlayer.create(context, R.raw.sheen_sound);
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.sheen_sound);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
         sound.start();
     }
 
     public static void playHollowShimmerSound(Context context) {
 
-        MediaPlayer sound = MediaPlayer.create(context, R.raw.hollow_shimmer);
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.hollow_shimmer);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
         sound.start();
     }
 
     public static void playHardRefuseClick(Context context) {
 
-        MediaPlayer sound = MediaPlayer.create(context, R.raw.hard_refuse_click);
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.sparky_click);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
         sound.start();
     }
 
     public static void playLiquidDropClick(Context context) {
 
-        MediaPlayer sound = MediaPlayer.create(context, R.raw.water_drop);
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.water_drop);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
         sound.start();
     }
 
     public static void playOptionsClick(Context context) {
 
-        MediaPlayer sound = MediaPlayer.create(context, R.raw.options_click);
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.options_click);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
         sound.start();
     }
 
     public static void playBacktrackClick(Context context) {
 
-        MediaPlayer sound = MediaPlayer.create(context, R.raw.backtrack_click);
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.backtrack_click);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
         sound.start();
     }
 
     public static void playGlassClick(Context context) {
 
-        MediaPlayer sound = MediaPlayer.create(context, R.raw.glass_click);
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.glass_click);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
         sound.start();
     }
 }

@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -42,8 +43,8 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
     // TODO: Rename and change types of parameters
 
     private View rootView;
-    private Button cancelButton;
-    private Button confirmButton;
+    private ImageButton cancelButton;
+    private ImageButton confirmButton;
     private Spinner difficultyDropdown;
     private Button chooseAnImageButton;
     private Button takeAPhotoButton;
@@ -86,8 +87,8 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_puzzle_pre_start, container, false);
-        cancelButton = (Button) rootView.findViewById(R.id.cancel_button);
-        confirmButton = (Button) rootView.findViewById(R.id.confirm_button);
+        cancelButton = (ImageButton) rootView.findViewById(R.id.cancel_button);
+        confirmButton = (ImageButton) rootView.findViewById(R.id.confirm_button);
         difficultyDropdown = (Spinner) rootView.findViewById(R.id.difficulty_dropdown);
 
         imagePreview = rootView.findViewById(R.id.image_preview);
@@ -125,6 +126,7 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
         // Add the fragment to the 'fragment_container' FrameLayout
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.activity_main, puzzleFragment).commit();
+        close();
     }
 
     @Override
@@ -141,7 +143,6 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
                 //close this fragment and go to the puzzle of the specified info
                 int difficulty = Integer.parseInt((Character.toString(difficultyDropdown.getSelectedItem().toString().charAt(0))));
                 openPuzzleFragment(difficulty);
-                close();
                 break;
             case R.id.choose_photo_button:
                 SoundPlayer.playLiquidDropClick(getContext());

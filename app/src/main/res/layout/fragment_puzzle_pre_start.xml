@@ -25,7 +25,8 @@
             android:text="@string/pre_start_title"
             android:textAlignment="center"
             android:textSize="40dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
         <TableRow>
 
@@ -35,7 +36,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:text="@string/difficulty_text"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:textColor="@color/black"/>
 
             <Spinner
                 android:id="@+id/difficulty_dropdown"
@@ -77,25 +79,27 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
+            <ImageButton
                 android:id="@+id/cancel_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✕"
-                android:textSize="20dp"
+                android:padding="5dp"
                 android:textStyle="bold"
+                android:src="@drawable/ic_close"
+                android:background="@drawable/stopwatch_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/confirm_button"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/confirm_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✓"
-                android:textSize="20dp"
                 android:textStyle="bold"
+                android:padding="5dp"
+                android:src="@drawable/ic_check"
+                android:background="@drawable/stopwatch_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/cancel_button"
                 app:layout_constraintRight_toRightOf="parent"

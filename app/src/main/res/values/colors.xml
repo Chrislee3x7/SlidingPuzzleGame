@@ -5,8 +5,8 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="pale_yellow">#DCD48D</color>
-    <color name="warm_orange">#DFA653</color>
-    <color name="pink_orange">#EA8A6C</color>
+    <color name="pale_yellow">#FED66C</color>
+    <color name="warm_orange">#E28855</color>
+    <color name="red_orange">#C63D2B</color>
     <color name="black">#000000</color>
 </resources>

@@ -495,6 +495,22 @@ public class PuzzleMatrix implements View.OnClickListener {
         sheenEffect.getLayoutParams().height = frameHeight;
         TranslateAnimation animation = new TranslateAnimation
                 (-frameWidth, (frameWidth + sheenEffect.getWidth()), 0, 0);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                puzzleFragment.puzzleEnd(true);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         animation.setDuration(1000);
         animation.setFillAfter(false);
         animation.setInterpolator(new AccelerateDecelerateInterpolator());

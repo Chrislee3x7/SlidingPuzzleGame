@@ -6,6 +6,9 @@
 
     <string name="pre_start_title">Start Game</string>
     <string name="difficulty_text">Difficulty:</string>
+    <string name="default_time_value">––:––:––</string>
+    <string name="default_movecount_value">–</string>
+    <string name="default_end_screen_title">Congratulations!</string>
     <string-array name="difficulty_choices">
         <item>3 x 3</item>
         <item>2 x 2</item>

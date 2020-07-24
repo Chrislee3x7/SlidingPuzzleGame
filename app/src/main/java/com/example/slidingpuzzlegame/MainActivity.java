@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button playButton;
     private PuzzlePreStartFragment puzzlePreStartFragment;
@@ -18,10 +18,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         playButton = (Button) findViewById(R.id.start_button);
+        playButton.setOnClickListener(this);
     }
 
-    public void openPreStartFragment(View view) {
-        SoundPlayer.playLiquidDropClick(this);
+    public PuzzlePreStartFragment getPreStartFragment() {
+        return puzzlePreStartFragment;
+    }
+
+    public void openPreStartFragment() {
         playButton.setVisibility(View.GONE);
         //playButton.setEnabled(false);
         // Create a new Fragment to be placed in the activity layout
@@ -42,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //playButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.start_button:
+                SoundPlayer.playLiquidDropClick(this);
+                openPreStartFragment();
+        }
     }
 
     //    public void closePreStartFragment(View view) {
