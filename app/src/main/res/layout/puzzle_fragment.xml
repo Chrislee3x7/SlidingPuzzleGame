@@ -76,7 +76,8 @@
                 android:background="@drawable/puzzle_background"
                 android:columnCount="4"
                 android:padding="3dp"
-                android:rowCount="4">
+                android:rowCount="4"
+                android:clickable="true">
                 <!--            android:layout_marginBottom="80dp"-->
                 <!--        android:layout_marginHorizontal="14dp"-->
             </GridLayout>

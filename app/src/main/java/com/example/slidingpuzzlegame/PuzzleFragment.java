@@ -173,26 +173,20 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
             endScreenTime.setText(currentTime);
             endScreenMovecount.setText(String.valueOf(currentMovecount));
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            String setBestTime = null;
             if (isNewBestTime(currentTime)) {
-                setBestTime = currentTime;
+                bestTime = currentTime;
                 endScreenTimeBest.setText(currentTime);
                 editor.putString("Best Time" + difficulty, stopwatch.getText().toString());
                 editor.apply();
-            } else {
-                setBestTime = bestTime;
             }
-            String setBestMovecount = null;
             if (isNewBestMovecount(currentMovecount)) {
-                setBestMovecount = currentMovecount;
+                bestMoveCount = currentMovecount;
                 editor.putInt("Best Movecount" + difficulty, Integer.parseInt(movecount.getText().toString()));
                 editor.apply();
-            } else {
-                setBestMovecount = bestMoveCount;
             }
-            endScreenTimeBest.setText(setBestTime);
-            endScreenMovecountBest.setText(setBestMovecount);
         }
+        endScreenTimeBest.setText(bestTime);
+        endScreenMovecountBest.setText(bestMoveCount);
         darkenBackground.setVisibility(View.VISIBLE);
         endScreen.setVisibility(View.VISIBLE);
 

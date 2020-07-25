@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+import android.view.DragEvent;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -17,7 +21,8 @@ import android.widget.Toast;
 
 import java.util.Stack;
 
-public class PuzzleMatrix implements View.OnClickListener {
+
+public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implements View.OnClickListener, View.OnTouchListener {
 
     private PuzzlePiece[] puzzlePieces;
     private PuzzlePiece[] solvedPuzzlePieces;
@@ -45,12 +50,19 @@ public class PuzzleMatrix implements View.OnClickListener {
 
     //for when game is paused and basically when game is not in foreground;
     private boolean movementLocked = false;
+    private boolean shouldStartDrag = false;
 
+
+    public boolean getShouldStartDrag() {
+        return shouldStartDrag;
+    }
 
     public PuzzleMatrix(int difficulty, Resources resources, Context context, GridLayout puzzleBoard,
                         View rootView, int frameWidth, int frameHeight, Bitmap userImage,
                         PuzzleFragment puzzleFragment) {
         this.puzzleBoard = puzzleBoard;
+        puzzleBoard.setOnClickListener(this);
+        puzzleBoard.setOnTouchListener(this);
         this.difficulty = difficulty;
         this.frameWidth = frameWidth - horizontalMargin;
         this.frameHeight = frameHeight - verticalStopwatchMarginAndBoardMargin;
@@ -532,7 +544,71 @@ public class PuzzleMatrix implements View.OnClickListener {
             case R.id.scramble_button:
                 performSheenEffect();
                 break;
+            case R.id.puzzle_board:
+                break;
 
         }
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+
+        //SoundPlayer.playOptionsClick(context);
+        int action = motionEvent.getAction();
+        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_DOWN) {
+            return true;
+        }
+        for (int i = 0; i < pieceSlots; i++) {
+
+            PuzzlePiece piece = getPuzzlePiece(i);
+            if (piece == null || getOpenAdjacentDirection(piece.getPieceLocationIndex()) == null) {
+                continue;
+            }
+            int boardLocation = translateCoordinatesToPieceIndex((int) motionEvent.getX(), (int) motionEvent.getY());
+            if (boardLocation != -1 && getPuzzlePiece(boardLocation) != null && boardLocation == piece.getPieceLocationIndex()) {
+                // over a View
+                if (piece.isMoving()) {
+                    return false;
+                }
+                pieceClicked(piece.getPieceLocationIndex());
+            }
+        }
+        return false;
+    }
+
+    public int translateCoordinatesToPieceIndex(int coordx, int coordy) {
+        int fieldWidth = puzzleBoard.getWidth();
+        int fieldHeight = puzzleBoard.getHeight();
+        int locX = coordx * difficulty / fieldWidth;
+        int locY = coordy * difficulty / fieldHeight;
+        int boardLocation = locX + locY * difficulty;
+        if (!isPieceLocationInRange(boardLocation)){
+            return -1;
+        }
+        return boardLocation;
+    }
+
+
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2,
+                            float distanceX, float distanceY) {
+        float finalIndexX;
+        float finalIndexY;
+        float startIndexX = e1.getX();
+        float startIndexY = e1.getY();
+        // we know already coordinates of first touch
+        // we know as well a scroll distance
+        finalIndexX = startIndexX - distanceX;
+        finalIndexY = startIndexY - distanceY;
+
+        // when the user scrolls within our side index
+        // we can show for every position in it a proper
+        // item in the country list
+        if (finalIndexX >= 0 && finalIndexY >= 0) {
+            int i = 0;
+        }
+
+        return super.onScroll(e1, e2, distanceX, distanceY);
     }
 }

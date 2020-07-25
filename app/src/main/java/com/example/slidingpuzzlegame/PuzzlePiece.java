@@ -1,10 +1,13 @@
 package com.example.slidingpuzzlegame;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridLayout;
@@ -13,7 +16,8 @@ import android.widget.Toast;
 
 import androidx.core.view.MotionEventCompat;
 
-public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView implements View.OnClickListener {
+public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView
+        implements View.OnClickListener, View.OnTouchListener, View.OnDragListener {
 
     private final PuzzleMatrix puzzleMatrix;
     private int pieceNumber;
@@ -28,7 +32,7 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView im
 
     private float x1, x2, y1, y2;
     static final int MIN_DISTANCE = 1;
-//    private Bitmap baseImage;
+    //    private Bitmap baseImage;
 //    private int difficulty;
     private int pieceWidth;
     private int pieceHeight;
@@ -37,8 +41,12 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView im
 
 
     @SuppressLint("ResourceAsColor")
-    public PuzzlePiece(int pieceNumber, Bitmap baseImage, int pieceWidth, int pieceHeight, int difficulty, Context context, PuzzleMatrix puzzleMatrix, View rootView) {
+    public PuzzlePiece(int pieceNumber, Bitmap baseImage, int pieceWidth,
+                       int pieceHeight, int difficulty, Context context,
+                       PuzzleMatrix puzzleMatrix, View rootView) {
         super(context);
+        setOnTouchListener(this);
+        setOnDragListener(this);
         this.context = context;
         this.puzzleMatrix = puzzleMatrix;
         this.pieceNumber = pieceNumber;
@@ -110,9 +118,9 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView im
             int finalWidth = maxWidth;
             int finalHeight = maxHeight;
             if (ratioMax > ratioBitmap) {
-                finalWidth = (int) ((float)maxHeight * ratioBitmap);
+                finalWidth = (int) ((float) maxHeight * ratioBitmap);
             } else {
-                finalHeight = (int) ((float)maxWidth / ratioBitmap);
+                finalHeight = (int) ((float) maxWidth / ratioBitmap);
             }
             bitmap = Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true);
             return bitmap;
@@ -121,24 +129,39 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView im
         }
     }
 
+
+    private boolean touchIsDown;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
         switch (action) {
             case (MotionEvent.ACTION_DOWN):
+                //puzzleMatrix.pieceClicked(pieceLocationIndex);
+                //startDragAndDrop()
 //                x1 = event.getX();
 //                y1 = event.getY();
-                return true;
+                break;
             case (MotionEvent.ACTION_UP):
-                        //Toast.makeText(context, "clicked " + pieceNumber, Toast.LENGTH_SHORT).show();
-                        int a = getWidth();
-                        puzzleMatrix.pieceClicked(pieceLocationIndex);
+                //Toast.makeText(context, "clicked " + pieceNumber, Toast.LENGTH_SHORT).show();
+                puzzleMatrix.pieceClicked(pieceLocationIndex);
 //                x2 = event.getX();
 //                y2 = event.getY();
+                break;
+            case (MotionEvent.ACTION_MOVE):
+//                ClipData data = ClipData.newPlainText("", "");
+//                DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(
+//                        this);
+//                startDragAndDrop(data, shadowBuilder, this, 0 );
+//                if () {
+//                    break;
+//                }
+                //puzzleMatrix.pieceClicked(pieceLocationIndex);
                 return true;
-            default:
-                return super.onTouchEvent(event);
+                //case (MotionEvent.ACTIO)
         }
+        return true;
+        //return super.onTouchEvent(event);
     }
 
     public int getPieceHeight() {
@@ -147,6 +170,29 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView im
 
     public int getPieceWidth() {
         return pieceWidth;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        Rect outRect = new Rect(getLeft(), getTop(), getRight(), getBottom());
+        if (outRect.contains((int) motionEvent.getX(), (int) motionEvent.getY())) {
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onDrag(View view, DragEvent dragEvent) {
+//        switch (dragEvent.getAction()) {
+//            case DragEvent.ACTION_DRAG_ENTERED:
+//                setVisibility(View.INVISIBLE);
+//                break;
+//            case DragEvent.ACTION_DROP:
+//                setVisibility(View.INVISIBLE);
+//                break;
+//
+//        }
+        return false;
     }
 }
 
