@@ -3,20 +3,26 @@ package com.example.slidingpuzzlegame;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button playButton;
+    private GridLayout puzzleDisplay;
+    private Button tipsPanel;
+    private TextView title;
     private PuzzlePreStartFragment puzzlePreStartFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        playButton = (Button) findViewById(R.id.start_button);
-        playButton.setOnClickListener(this);
+        puzzleDisplay = (GridLayout) findViewById(R.id.home_screen_puzzle_display);
+        puzzleDisplay.setOnClickListener(this);
+        tipsPanel = (Button) findViewById(R.id.tips_panel);
+        title = (TextView) findViewById(R.id.game_title);
     }
 
     public PuzzlePreStartFragment getPreStartFragment() {
@@ -24,7 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void openPreStartFragment() {
-        playButton.setVisibility(View.GONE);
+        puzzleDisplay.setVisibility(View.GONE);
+        tipsPanel.setVisibility(View.GONE);
+        title.setVisibility(View.GONE);
         //playButton.setEnabled(false);
         // Create a new Fragment to be placed in the activity layout
         puzzlePreStartFragment = new PuzzlePreStartFragment();
@@ -37,7 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void showMainMenu() {
-        playButton.setVisibility(View.VISIBLE);
+        puzzleDisplay.setVisibility(View.VISIBLE);
+        tipsPanel.setVisibility(View.VISIBLE);
+        title.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -49,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.start_button:
+            case R.id.home_screen_puzzle_display:
                 SoundPlayer.playLiquidDropClick(this);
                 openPreStartFragment();
         }

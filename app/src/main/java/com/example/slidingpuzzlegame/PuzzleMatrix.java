@@ -15,11 +15,15 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
 
 
 public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implements View.OnClickListener, View.OnTouchListener {
@@ -50,12 +54,7 @@ public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implem
 
     //for when game is paused and basically when game is not in foreground;
     private boolean movementLocked = false;
-    private boolean shouldStartDrag = false;
 
-
-    public boolean getShouldStartDrag() {
-        return shouldStartDrag;
-    }
 
     public PuzzleMatrix(int difficulty, Resources resources, Context context, GridLayout puzzleBoard,
                         View rootView, int frameWidth, int frameHeight, Bitmap userImage,
@@ -75,29 +74,48 @@ public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implem
         //minus 1 for open hole at the end
         pieceCount = (difficulty * difficulty) - 1;
         pieceSlots = difficulty * difficulty;
-        if (userImage == null) {
-            this.baseImage = BitmapFactory.decodeResource(resources, R.drawable.goku_test_image);
-        } else {
-            this.baseImage = userImage;
-        }
-        this.baseImage = resize(this.baseImage);
-        pieceWidth = baseImage.getWidth() / difficulty;
-        pieceHeight = baseImage.getHeight() / difficulty;
         puzzlePieces = new PuzzlePiece[pieceSlots];
         solvedPuzzlePieces = new PuzzlePiece[pieceSlots];
         puzzleBoard.setColumnCount(difficulty);
         puzzleBoard.setRowCount(difficulty);
-        //GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-        PuzzlePiece pTest = null;
-        for (int i = 0; i < pieceCount; i++) {
-            PuzzlePiece p = new PuzzlePiece(i, baseImage, (int) (pieceWidth), (int) (pieceHeight), difficulty, context, this, rootView);
-            puzzlePieces[i] = p;
-            solvedPuzzlePieces[i] = p;
-            puzzleBoard.addView(p);
+        if (userImage == null) {
+            //this.baseImage = BitmapFactory.decodeResource(resources, R.drawable.goku_test_image);
+            puzzleBoard.setBackgroundResource(R.drawable.puzzle_display_background);
+            for (int i = 0; i < pieceCount; i++) {
+                pieceWidth = 300;
+                pieceHeight = 300;
+                PuzzlePiece p = new PuzzlePiece(i, null, pieceWidth, pieceHeight,
+                        difficulty, context, this, rootView);
+                pieceWidth += 8;
+                pieceHeight += 8;
+                puzzlePieces[i] = p;
+                solvedPuzzlePieces[i] = p;
+                puzzleBoard.addView(p);
+//                puzzleBoard.setPadding(2, 2, 2, 0);
+            }
+            //make the default puzzle style (same as the one on the home screen)
+        } else {
+            this.baseImage = userImage;
+            this.baseImage = resize(this.baseImage);
+            pieceWidth = baseImage.getWidth() / difficulty;
+            pieceHeight = baseImage.getHeight() / difficulty;
+            for (int i = 0; i < pieceCount; i++) {
+                PuzzlePiece p = new PuzzlePiece(i, baseImage, (int) (pieceWidth), (int) (pieceHeight),
+                        difficulty, context, this, rootView);
+                puzzlePieces[i] = p;
+                solvedPuzzlePieces[i] = p;
+                puzzleBoard.addView(p);
+            }
         }
     }
 
     public void addFinalPiece() {
+        SoundPlayer.playHollowShimmerSound(context);
+        if (baseImage == null) {
+            //dont want to add an extra "tile" to the regular version
+            performSheenEffect();
+            return;
+        }
         PuzzlePiece p = new PuzzlePiece(pieceCount, baseImage, (int) (pieceWidth),
                 (int) (pieceHeight), difficulty, context, this, rootView);
         puzzlePieces[pieceCount] = p;
@@ -125,7 +143,6 @@ public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implem
         fadeInFinalPiece.setDuration(1800);
         fadeInFinalPiece.setFillAfter(false);
         fadeInFinalPiece.start();
-        SoundPlayer.playHollowShimmerSound(context);
         p.setVisibility(View.VISIBLE);
         finalPieceAdded = true;
     }
@@ -200,9 +217,11 @@ public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implem
         openAdjacentDirection = getOpenAdjacentDirection(piecesToMove.peek()
                 .getPieceLocationIndex());
         if (openAdjacentDirection == Direction.UP || openAdjacentDirection == Direction.DOWN) {
-            distance = (int) currentPiece.getPieceHeight();
+//            distance = (int) currentPiece.getPieceHeight();
+            distance = pieceHeight;
         } else {
-            distance = (int) currentPiece.getPieceWidth();
+//            distance = (int) currentPiece.getPieceWidth();
+            distance = pieceWidth;
         }
         while (!piecesToMove.empty()) {
             PuzzlePiece p = piecesToMove.pop();
@@ -510,8 +529,8 @@ public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implem
     }
 
     public void performSheenEffect() {
-        sheenEffect.getLayoutParams().width = frameWidth;
-        sheenEffect.getLayoutParams().height = frameHeight;
+        sheenEffect.getLayoutParams().width = puzzleBoard.getWidth();
+        sheenEffect.getLayoutParams().height = puzzleBoard.getHeight();
         TranslateAnimation animation = new TranslateAnimation
                 (-frameWidth, (frameWidth + sheenEffect.getWidth()), 0, 0);
         animation.setAnimationListener(new Animation.AnimationListener() {
@@ -542,7 +561,6 @@ public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implem
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.scramble_button:
-                performSheenEffect();
                 break;
             case R.id.puzzle_board:
                 break;
@@ -576,11 +594,11 @@ public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implem
         return false;
     }
 
-    public int translateCoordinatesToPieceIndex(int coordx, int coordy) {
+    public int translateCoordinatesToPieceIndex(int coordX, int coordY) {
         int fieldWidth = puzzleBoard.getWidth();
         int fieldHeight = puzzleBoard.getHeight();
-        int locX = coordx * difficulty / fieldWidth;
-        int locY = coordy * difficulty / fieldHeight;
+        int locX = coordX * difficulty / fieldWidth;
+        int locY = coordY * difficulty / fieldHeight;
         int boardLocation = locX + locY * difficulty;
         if (!isPieceLocationInRange(boardLocation)){
             return -1;

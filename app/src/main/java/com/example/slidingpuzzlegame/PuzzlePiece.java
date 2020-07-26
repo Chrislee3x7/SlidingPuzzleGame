@@ -10,13 +10,15 @@ import android.graphics.drawable.Drawable;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.core.view.MotionEventCompat;
 
-public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView
+public class PuzzlePiece extends androidx.appcompat.widget.AppCompatButton
         implements View.OnClickListener, View.OnTouchListener, View.OnDragListener {
 
     private final PuzzleMatrix puzzleMatrix;
@@ -30,12 +32,13 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView
     private int h;
     private View rootView;
 
+    private int pieceWidth;
+    private int pieceHeight;
+
     private float x1, x2, y1, y2;
     static final int MIN_DISTANCE = 1;
     //    private Bitmap baseImage;
 //    private int difficulty;
-    private int pieceWidth;
-    private int pieceHeight;
 
     private boolean isMoving = false;
 
@@ -50,33 +53,51 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView
         this.context = context;
         this.puzzleMatrix = puzzleMatrix;
         this.pieceNumber = pieceNumber;
-        this.pieceWidth = pieceWidth;
-        this.pieceHeight = pieceHeight;
         pieceLocationIndex = pieceNumber;
 
         baseRow = pieceNumber / difficulty;
         baseColumn = pieceNumber % difficulty;
         //this.pieceWidth = pieceWidth;
         //this.pieceHeight = pieceHeight;
-        pieceImage = Bitmap.createBitmap(baseImage, baseColumn * pieceWidth, baseRow * pieceHeight, pieceWidth, pieceHeight);
-        //pieceImage = resize(pieceImage, rootView.getWidth() / difficulty, rootView.getHeight()/difficulty);
-        setScaleType(ScaleType.CENTER_INSIDE);
-        setAdjustViewBounds(true);
-        //setPadding(4, 4, 4, 4);
+        if (baseImage != null) {
+            pieceImage = Bitmap.createBitmap(baseImage, baseColumn * pieceWidth, baseRow * pieceHeight, pieceWidth, pieceHeight);
+            //pieceImage = resize(pieceImage, rootView.getWidth() / difficulty, rootView.getHeight()/difficulty);
+//        setScaleType(ScaleType.CENTER_INSIDE);
+//        setAdjustViewBounds(true);
+            //setPadding(4, 4, 4, 4);
+            this.pieceHeight = pieceHeight;
+            this.pieceWidth = pieceWidth;
 
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED),
-                GridLayout.spec(GridLayout.UNDEFINED));
-        params.width = pieceWidth;
-        params.height = pieceHeight;
-        //params.width = rootView.getWidth() - 16 / difficulty;
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED),
+                    GridLayout.spec(GridLayout.UNDEFINED));
+            params.width = pieceWidth;
+            params.height = pieceHeight;
+            //params.width = rootView.getWidth() - 16 / difficulty;
 //        params.height = 200;
-        setLayoutParams(params);
-        setBackgroundColor(R.color.white);
-        setDrawingCacheEnabled(true);
-        Drawable d = new BitmapDrawable(getResources(), pieceImage);
-        setImageBitmap(pieceImage);
-        //setBackgroundDrawable(d);
-        int a = getWidth();
+            setLayoutParams(params);
+            setBackgroundColor(R.color.white);
+            setDrawingCacheEnabled(true);
+            Drawable d = new BitmapDrawable(getResources(), pieceImage);
+//        setImageBitmap(pieceImage);
+            setBackground(d);
+        }
+
+        else {
+            //if base image is null
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, 1f),
+                    GridLayout.spec(GridLayout.UNDEFINED, 1f));
+            params.width = pieceWidth;
+            params.height = pieceHeight;
+            params.bottomMargin = 4;
+            params.leftMargin = 4;
+            params.topMargin = 4;
+            params.rightMargin = 4;
+            setLayoutParams(params);
+
+            setText(String.valueOf(pieceNumber + 1));
+            setTextSize(30f);
+            setBackgroundResource(R.drawable.puzzle_piece_background);
+        }
     }
 
     public void setIsMoving(boolean newIsMoving) {
@@ -107,28 +128,6 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView
     public void onClick(View view) {
 
     }
-
-    private Bitmap resize(Bitmap bitmap, int maxWidth, int maxHeight) {
-        if (maxHeight > 0 && maxWidth > 0) {
-            int width = bitmap.getWidth();
-            int height = bitmap.getHeight();
-            float ratioBitmap = (float) width / (float) height;
-            float ratioMax = (float) maxWidth / (float) maxHeight;
-
-            int finalWidth = maxWidth;
-            int finalHeight = maxHeight;
-            if (ratioMax > ratioBitmap) {
-                finalWidth = (int) ((float) maxHeight * ratioBitmap);
-            } else {
-                finalHeight = (int) ((float) maxWidth / ratioBitmap);
-            }
-            bitmap = Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true);
-            return bitmap;
-        } else {
-            return bitmap;
-        }
-    }
-
 
     private boolean touchIsDown;
 
@@ -165,10 +164,14 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatImageView
     }
 
     public int getPieceHeight() {
+        //return getHeight();
+
         return pieceHeight;
     }
 
     public int getPieceWidth() {
+        //return getWidth();
+
         return pieceWidth;
     }
 
