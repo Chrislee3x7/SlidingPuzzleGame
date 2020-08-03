@@ -8,23 +8,32 @@
     android:background="@drawable/menu_background"
     tools:context=".MainActivity">
 
+    <ImageButton
+        android:id="@+id/home_screen_settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/stopwatch_background"
+        android:padding="5dp"
+        android:src="@drawable/ic_settings_mini"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/game_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
         android:text="Sliding Puzzle Game"
         android:textAlignment="center"
         android:textSize="50dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/home_screen_settings_button" />
 
     <GridLayout
         android:id="@+id/home_screen_puzzle_display"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="30dp"
@@ -43,90 +52,123 @@
         <Button
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="1dp"
             android:background="@drawable/puzzle_piece_background"
             android:clickable="false"
             android:text="1"
-            android:textSize="30sp"
-            android:layout_margin="1dp"/>
+            android:textSize="30sp" />
 
         <Button
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="1dp"
             android:background="@drawable/puzzle_piece_background"
             android:clickable="false"
             android:text="2"
-            android:textSize="30sp"
-            android:layout_margin="1dp"/>
+            android:textSize="30sp" />
 
         <Button
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="1dp"
             android:background="@drawable/puzzle_piece_background"
             android:clickable="false"
             android:text="3"
-            android:textSize="30sp"
-            android:layout_margin="1dp"/>
+            android:textSize="30sp" />
 
         <Button
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="1dp"
             android:background="@drawable/puzzle_piece_background"
             android:clickable="false"
             android:text="4"
-            android:textSize="30sp"
-            android:layout_margin="1dp"/>
+            android:textSize="30sp" />
 
         <Button
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="1dp"
             android:background="@drawable/puzzle_piece_background"
             android:clickable="false"
             android:text="5"
-            android:textSize="30sp"
-            android:layout_margin="1dp"/>
+            android:textSize="30sp" />
 
         <Button
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="1dp"
             android:background="@drawable/puzzle_piece_background"
             android:clickable="false"
             android:text="6"
-            android:textSize="30sp"
-            android:layout_margin="1dp"/>
+            android:textSize="30sp" />
 
         <Button
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="1dp"
             android:background="@drawable/puzzle_piece_background"
             android:clickable="false"
             android:text="7"
-            android:textSize="30sp"
-            android:layout_margin="1dp"/>
+            android:textSize="30sp" />
 
         <Button
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:layout_margin="1dp"
             android:background="@drawable/puzzle_piece_background"
             android:clickable="false"
             android:text="8"
-            android:textSize="30sp"
-            android:layout_margin="1dp"/>
+            android:textSize="30sp" />
 
     </GridLayout>
 
-    <Button
+    <LinearLayout
         android:id="@+id/tips_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/home_screen_puzzle_display"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/play_button_background"
-        android:padding="20dp"
-        android:textAllCaps="false"
-        android:textSize="40dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_screen_puzzle_display" />
+        app:layout_constraintRight_toRightOf="parent">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/tips_display"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:paddingHorizontal="20dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/pager_dots"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tips_panel">
+
+<!--            <View-->
+<!--                android:layout_width="12dp"-->
+<!--                android:layout_height="12dp"-->
+<!--                android:layout_marginHorizontal="5dp"-->
+<!--                android:background="@drawable/selected_dot" />-->
+
+<!--            <View-->
+<!--                android:layout_width="12dp"-->
+<!--                android:layout_height="12dp"-->
+<!--                android:layout_marginHorizontal="5dp"-->
+<!--                android:background="@drawable/unselected_dot" />-->
+
+<!--            <View-->
+<!--                android:layout_width="12dp"-->
+<!--                android:layout_height="12dp"-->
+<!--                android:layout_marginHorizontal="5dp"-->
+<!--                android:background="@drawable/unselected_dot" />-->
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df4806f6-5214-4637-8865-6bc33783fe34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/puzzle_display_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/selected_dot.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/unselected_dot.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -23,13 +24,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleMatrix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePiece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/puzzle_piece_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/puzzle_piece_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/stopwatch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/stopwatch_background.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/puzzle_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/puzzle_fragment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +38,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="92GAY015L6" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="One_Plus_7_Pro_API_30" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -59,9 +60,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
-        <option value="resourceFile" />
         <option value="layoutResourceFile" />
+        <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -231,10 +232,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="728" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1595723264112">
+    <state x="728" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1595807508764">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="728" y="128" key="#com.intellij.ide.util.MemberChooser/0.23.1280.777@0.23.1280.777" timestamp="1595723264112" />
+    <state x="728" y="128" key="#com.intellij.ide.util.MemberChooser/0.23.1280.777@0.23.1280.777" timestamp="1595807508764" />
     <state x="378" y="165" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595131853848">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -259,54 +260,54 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="184" y="23" key="CommitChangelistDialog2/0.23.1280.777@0.23.1280.777" timestamp="1595621369445" />
-    <state width="1238" height="197" key="GridCell.Tab.0.bottom" timestamp="1595724640967">
+    <state width="1238" height="197" key="GridCell.Tab.0.bottom" timestamp="1596231645857">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="197" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1595724640967" />
-    <state width="1238" height="197" key="GridCell.Tab.0.center" timestamp="1595724640966">
+    <state width="1238" height="197" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1596231645856" />
+    <state width="1238" height="197" key="GridCell.Tab.0.center" timestamp="1596231645855">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="197" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1595724640966" />
-    <state width="1238" height="197" key="GridCell.Tab.0.left" timestamp="1595724640966">
+    <state width="1238" height="197" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1596231645854" />
+    <state width="1238" height="197" key="GridCell.Tab.0.left" timestamp="1596231645851">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="197" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1595724640966" />
-    <state width="1238" height="197" key="GridCell.Tab.0.right" timestamp="1595724640966">
+    <state width="1238" height="197" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1596231645851" />
+    <state width="1238" height="197" key="GridCell.Tab.0.right" timestamp="1596231645855">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="197" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1595724640966" />
-    <state width="1238" height="305" key="GridCell.Tab.1.bottom" timestamp="1595723785015">
+    <state width="1238" height="197" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1596231645855" />
+    <state width="1238" height="305" key="GridCell.Tab.1.bottom" timestamp="1595810082166">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1595723785015" />
-    <state width="1238" height="305" key="GridCell.Tab.1.center" timestamp="1595723785015">
+    <state width="1238" height="305" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1595810082166" />
+    <state width="1238" height="305" key="GridCell.Tab.1.center" timestamp="1595810082166">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1595723785015" />
-    <state width="1238" height="305" key="GridCell.Tab.1.left" timestamp="1595723785015">
+    <state width="1238" height="305" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1595810082166" />
+    <state width="1238" height="305" key="GridCell.Tab.1.left" timestamp="1595810082166">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1595723785015" />
-    <state width="1238" height="305" key="GridCell.Tab.1.right" timestamp="1595723785015">
+    <state width="1238" height="305" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1595810082166" />
+    <state width="1238" height="305" key="GridCell.Tab.1.right" timestamp="1595810082166">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1595723785015" />
+    <state width="1238" height="305" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1595810082166" />
     <state x="149" y="50" key="SettingsEditor" timestamp="1595621667320">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="149" y="50" key="SettingsEditor/0.23.1280.777@0.23.1280.777" timestamp="1595621667320" />
-    <state x="429" y="335" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1595370960982">
+    <state x="429" y="335" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1595803240181">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="429" y="335" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.777@0.23.1280.777" timestamp="1595370960982" />
+    <state x="429" y="335" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.777@0.23.1280.777" timestamp="1595803240181" />
     <state x="306" y="168" width="667" height="486" key="find.popup" timestamp="1594597776157">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="306" y="168" width="667" height="486" key="find.popup/0.23.1280.777@0.23.1280.777" timestamp="1594597776157" />
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1595567369967">
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1595806054459">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.23.1280.777@0.23.1280.777" timestamp="1595567369967" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.23.1280.777@0.23.1280.777" timestamp="1595806054459" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -195,19 +195,19 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
 
     private String getBestTime() {
         return sharedPreferences.getString("Best Time" + difficulty,
-                "9:99:99");
+                getString(R.string.default_time_value));
 
     }
 
     private String getBestMovecount() {
         if (!sharedPreferences.contains("Best Movecount" + difficulty)) {
-            return String.valueOf(Integer.MAX_VALUE);
+            return getString(R.string.default_movecount_value);
         }
         return Integer.toString(sharedPreferences.getInt("Best Movecount" + difficulty, 0));
     }
 
     private boolean isNewBestTime(String curentTime) {
-        if (bestMoveCount.equals(getString(R.string.default_time_value))) {
+        if (bestTime.equals(getString(R.string.default_time_value))) {
             return true;
         }
         if (curentTime.substring(0, 1).equals(bestTime.substring(0, 1))) {
@@ -403,9 +403,14 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    public void updateRecords() {
+
+    }
+
     public void openStatisticsFragment() {
         // Create a new Fragment to be placed in the activity layout
         final StatisticsFragment statisticsFragment = new StatisticsFragment();
+
         // In case this activity was started with special instructions from an
         // Intent, pass the Intent's extras to the fragment as arguments
         //statisticsFragment.setArguments(getActivity().getIntent().getExtras());
