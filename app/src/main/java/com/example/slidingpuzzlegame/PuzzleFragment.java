@@ -169,20 +169,27 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         String currentMovecount = movecount.getText().toString();
         if (!successful) {
             endScreenTitle.setText("Try Again");
+            SoundPlayer.playAwwDisappointment(getContext());
         } else {
+            SoundPlayer.playApplause(getContext());
             endScreenTime.setText(currentTime);
             endScreenMovecount.setText(String.valueOf(currentMovecount));
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            if (isNewBestTime(currentTime)) {
+            boolean isNewBestTime = isNewBestTime(currentTime);
+            boolean isNewBestMovecount = isNewBestMovecount(currentMovecount);
+            if (isNewBestTime) {
                 bestTime = currentTime;
                 endScreenTimeBest.setText(currentTime);
                 editor.putString("Best Time" + difficulty, stopwatch.getText().toString());
                 editor.apply();
             }
-            if (isNewBestMovecount(currentMovecount)) {
+            if (isNewBestMovecount) {
                 bestMoveCount = currentMovecount;
                 editor.putInt("Best Movecount" + difficulty, Integer.parseInt(movecount.getText().toString()));
                 editor.apply();
+            }
+            if (isNewBestTime || isNewBestMovecount) {
+                SoundPlayer.playWowSparkle(getContext());
             }
         }
         endScreenTimeBest.setText(bestTime);
@@ -324,8 +331,8 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         pauseMenuGiveUpButton.setOnClickListener(this);
         pauseMenuStatsButton = (Button) rootView.findViewById(R.id.pause_menu_stats_button);
         pauseMenuStatsButton.setOnClickListener(this);
-        pauseMenuOptionsButton = (Button) rootView.findViewById(R.id.pause_menu_options_button);
-        pauseMenuOptionsButton.setOnClickListener(this);
+//        pauseMenuOptionsButton = (Button) rootView.findViewById(R.id.pause_menu_options_button);
+//        pauseMenuOptionsButton.setOnClickListener(this);
         darkenBackground = rootView.findViewById(R.id.darken_background);
         darkenBackground.setOnClickListener(this);
 
@@ -358,9 +365,11 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
                 //reload the same puzzle with another scramble
                 //close this fragment
                 MainActivity mainActivity = ((MainActivity) getActivity());
-                mainActivity.openPreStartFragment();
-//                PuzzlePreStartFragment puzzlePreStartFragment = mainActivity.getPreStartFragment();
-//                puzzlePreStartFragment.openPuzzleFragment(difficulty);
+//                mainActivity.openPreStartFragment();
+                PuzzleFragment newPuzzle = new PuzzleFragment();
+                newPuzzle.setArguments(getArguments());
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.activity_main, newPuzzle).commit();
                 close();
                 break;
 
@@ -380,19 +389,24 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.pause_menu_retry_button:
                 SoundPlayer.playLiquidDropClick(getContext());
-                darkenBackground.setVisibility(View.INVISIBLE);
-                pauseMenu.setVisibility(View.GONE);
-                //implement retry
+                //reload the same puzzle with another scramble
+                //close this fragment
+//                mainActivity.openPreStartFragment();
+                PuzzleFragment newPuzzleFromPause = new PuzzleFragment();
+                newPuzzleFromPause.setArguments(getArguments());
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.activity_main, newPuzzleFromPause).commit();
+                close();
                 break;
             case R.id.pause_menu_stats_button:
                 SoundPlayer.playLiquidDropClick(getContext());
                 openStatisticsFragment();
                 //dont need to close the pausemenu
                 break;
-            case R.id.pause_menu_options_button:
-                SoundPlayer.playLiquidDropClick(getContext());
-                //also do not need to close the pause menue also do not need to darken background
-                break;
+//            case R.id.pause_menu_options_button:
+//                SoundPlayer.playLiquidDropClick(getContext());
+//                //also do not need to close the pause menu also do not need to darken background
+//                break;
             case R.id.darken_background:
                 SoundPlayer.playLiquidDropClick(getContext());
                 darkenBackground.setVisibility(View.INVISIBLE);

@@ -82,8 +82,8 @@ public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implem
             //this.baseImage = BitmapFactory.decodeResource(resources, R.drawable.goku_test_image);
             puzzleBoard.setBackgroundResource(R.drawable.puzzle_display_background);
             for (int i = 0; i < pieceCount; i++) {
-                pieceWidth = 300;
-                pieceHeight = 300;
+                pieceWidth = 300 * 3 / difficulty;
+                pieceHeight = 300 * 3 / difficulty;
                 PuzzlePiece p = new PuzzlePiece(i, null, pieceWidth, pieceHeight,
                         difficulty, context, this, rootView);
                 pieceWidth += 8;

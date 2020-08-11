@@ -1,6 +1,7 @@
 package com.example.slidingpuzzlegame;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         puzzleDisplay = (GridLayout) findViewById(R.id.home_screen_puzzle_display);
-        homeSettingsButton = (ImageButton) findViewById(R.id.home_screen_settings_button);
+//        homeSettingsButton = (ImageButton) findViewById(R.id.home_screen_settings_button);
         puzzleDisplay.setOnClickListener(this);
         title = (TextView) findViewById(R.id.game_title);
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void openPreStartFragment() {
         puzzleDisplay.setVisibility(View.GONE);
-        homeSettingsButton.setVisibility(View.GONE);
+//        homeSettingsButton.setVisibility(View.GONE);
         tipsPanel.setVisibility(View.GONE);
         title.setVisibility(View.GONE);
         //playButton.setEnabled(false);
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         puzzleDisplay.setVisibility(View.VISIBLE);
         tipsPanel.setVisibility(View.VISIBLE);
         title.setVisibility(View.VISIBLE);
-        homeSettingsButton.setVisibility(View.VISIBLE);
+//        homeSettingsButton.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -88,25 +89,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setPagerViews() {
         pagerViews = new TextView[4];
-        pagerViews[0] = createPagerTextView("Welcome to this basic sliding puzzle game! Hope you enjoy! " +
-                "The rest of these panels include some tips on how to play, while the puzzle board above " +
-                "demonstrates them! Be sure to check them out!");
-        pagerViews[1] = createPagerTextView("In addition to swiping, you can also tap a tile to move " +
-                "it to the open location, given that it is a valid move");
-        pagerViews[2] = createPagerTextView("You can move multiple pieces at once by tapping or swiping a piece" +
-                "in the same row and column as an open spot");
-        pagerViews[3] = createPagerTextView("By starting in the blank spot, you can swipe through multiple" +
-                "pieces to move them to the blank spot one at a time. This is a good way to solve the puzzle" +
-                "more smoothly and quickly, but won't be the most optimal for lowering your movecount.");
+        pagerViews[0] = createPagerTextView("Welcome to Sliding Puzzle game! Hope you enjoy!" +
+                " Swipe to see some tips!");
+        pagerViews[1] = createPagerTextView("Try tapping a tile to move " +
+                "it to the open location!");
+        pagerViews[2] = createPagerTextView("You can also move multiple pieces at once!");
+        pagerViews[3] = createPagerTextView("By starting in the blank spot, you can swipe through multiple " +
+                "pieces to solve quickly!");
     }
 
     public TextView createPagerTextView(String text) {
         TextView textView = new TextView(getApplicationContext());
         textView.setBackgroundResource(R.drawable.play_button_background);
-        textView.setPadding(10, 50, 10, 5);
+        textView.setPadding(5,0,5,0);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView.setHeight(150);
-        textView.setTextSize(15);
+        textView.setTextSize(18);
         textView.setText(text);
         return textView;
     }
@@ -121,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public Object instantiateItem(ViewGroup collection, int position) {
                 TextView textViewToAdd = pagerViews[position];
+                textViewToAdd.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                textViewToAdd.setGravity(Gravity.CENTER);
                 collection.addView(textViewToAdd);
                 return textViewToAdd;
             }
@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
+                SoundPlayer.playWhoosh(getApplicationContext());
                 for (int i = 0; i < pagerDotsArray.length; i++) {
                     pagerDotsArray[i].setBackgroundResource(R.drawable.unselected_dot);
                 }

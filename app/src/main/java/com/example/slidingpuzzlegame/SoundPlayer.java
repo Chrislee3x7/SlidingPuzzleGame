@@ -88,4 +88,64 @@ public class SoundPlayer {
         });
         sound.start();
     }
+
+    public static void playWhoosh(Context context) {
+
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.simple_swipe);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
+        sound.start();
+    }
+
+    public static void playWowSparkle(Context context) {
+
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.wow_sparkle);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
+        sound.start();
+    }
+
+    public static void playAwwDisappointment(Context context) {
+
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.aww);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
+        sound.start();
+    }
+
+    public static void playApplause(Context context) {
+
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.applause);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
+        sound.start();
+    }
+
+    public static void playScramble(Context context) {
+
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.applause);
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                sound.release();
+            }
+        });
+        sound.start();
+    }
 }

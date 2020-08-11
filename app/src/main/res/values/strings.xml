@@ -14,9 +14,10 @@
     <string name="retry">Retry</string>
     <string name="options">Options</string>
     <string name="back">Back</string>
+    <string name="pre_start_image_preview_text">Tap to choose image \nor \ntry the default!</string>
     <string-array name="difficulty_choices">
         <item>3 x 3</item>
-        <item>2 x 2</item>
+<!--        <item>2 x 2</item>-->
         <item>4 x 4</item>
         <item>5 x 5</item>
         <item>6 x 6</item>

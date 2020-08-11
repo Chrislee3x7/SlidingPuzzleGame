@@ -95,7 +95,8 @@ public class PuzzlePiece extends androidx.appcompat.widget.AppCompatButton
             setLayoutParams(params);
 
             setText(String.valueOf(pieceNumber + 1));
-            setTextSize(30f);
+            //adjust text size depending on the piece size
+            setTextSize(30 - (4 * (difficulty - 3)));
             setBackgroundResource(R.drawable.puzzle_piece_background);
         }
     }
