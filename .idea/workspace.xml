@@ -4,6 +4,7 @@
     <shared>
       <config>
         <device id="pixel_3a" />
+        <device id="pixel_2" />
       </config>
     </shared>
   </component>
@@ -12,13 +13,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df4806f6-5214-4637-8865-6bc33783fe34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_pause.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_pause_mini.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/app_whoosh.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/applause.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/aww.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/simple_swipe.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/wow_sparkle.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_cardview_cardview_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_recyclerview_recyclerview_1_1_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_transition_transition_1_2_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_viewpager2_viewpager2_1_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_material_material_1_1_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/slide_in_up.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/special_puzzle_piece_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/stats_record_card.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/scramble_whoosh2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/raw/scramble_woosh.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/transition/fade.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/transition/slide_bottom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/transition/slide_right.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/transition/slide_top.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -30,19 +38,25 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_coordinatorlayout_coordinatorlayout_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_coordinatorlayout_coordinatorlayout_1_1_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleMatrix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePiece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePreStartFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePreStartFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/SoundPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/SoundPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/StatisticsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/StatisticsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/stopwatch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/stopwatch_background.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_puzzle_pre_start.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_puzzle_pre_start.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/puzzle_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/puzzle_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_statistics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_statistics.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,8 +86,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="layoutResourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
         <option value="resourceFile" />
       </list>
     </option>
@@ -103,11 +117,12 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/raw" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/transition" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/raw" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
     </key>
   </component>
@@ -252,17 +267,18 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="378" y="165" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1280.777@0.23.1280.777" timestamp="1595131853848" />
-    <state x="228" y="173" key="AndroidCreateResourceDirectoryDialog" timestamp="1595470716122">
+    <state x="228" y="173" key="AndroidCreateResourceDirectoryDialog" timestamp="1597362331823">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="228" y="173" key="AndroidCreateResourceDirectoryDialog/0.23.1280.777@0.23.1280.777" timestamp="1595470716121" />
-    <state x="228" y="173" key="AndroidCreateResourceFileDialog" timestamp="1594689707773">
+    <state x="228" y="173" key="AndroidCreateResourceDirectoryDialog/0.23.1280.777@0.23.1280.777" timestamp="1597362331823" />
+    <state x="228" y="173" key="AndroidCreateResourceFileDialog" timestamp="1597362045735">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state x="228" y="173" key="AndroidCreateResourceFileDialog/0.23.1280.777@0.23.1280.777" timestamp="1594689707773" />
-    <state x="499" y="266" key="AndroidCreateXmlResourceDialog" timestamp="1597171156949">
-      <screen x="0" y="23" width="1280" height="777" />
+    <state x="228" y="173" key="AndroidCreateResourceFileDialog/0.23.1280.777@0.23.1280.777" timestamp="1597362045735" />
+    <state x="423" y="-809" key="AndroidCreateXmlResourceDialog" timestamp="1597282560952">
+      <screen x="-326" y="-1177" width="1920" height="1177" />
     </state>
+    <state x="423" y="-809" key="AndroidCreateXmlResourceDialog/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597282560952" />
     <state x="499" y="266" key="AndroidCreateXmlResourceDialog/0.23.1280.777@0.23.1280.777" timestamp="1597171156949" />
     <state x="503" y="184" key="AndroidProcessChooserDialog" timestamp="1595279404461">
       <screen x="0" y="23" width="1280" height="777" />
@@ -272,42 +288,50 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="184" y="23" key="CommitChangelistDialog2/0.23.1280.777@0.23.1280.777" timestamp="1597170638665" />
-    <state width="1238" height="197" key="GridCell.Tab.0.bottom" timestamp="1596231645857">
+    <state width="1238" height="196" key="GridCell.Tab.0.bottom" timestamp="1597358632017">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="197" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1596231645856" />
-    <state width="1238" height="197" key="GridCell.Tab.0.center" timestamp="1596231645855">
+    <state width="1878" height="328" key="GridCell.Tab.0.bottom/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597283952888" />
+    <state width="1238" height="196" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1597358632017" />
+    <state width="1238" height="196" key="GridCell.Tab.0.center" timestamp="1597358632016">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="197" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1596231645854" />
-    <state width="1238" height="197" key="GridCell.Tab.0.left" timestamp="1596231645851">
+    <state width="1878" height="328" key="GridCell.Tab.0.center/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597283952886" />
+    <state width="1238" height="196" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1597358632016" />
+    <state width="1238" height="196" key="GridCell.Tab.0.left" timestamp="1597358632016">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="197" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1596231645851" />
-    <state width="1238" height="197" key="GridCell.Tab.0.right" timestamp="1596231645855">
+    <state width="1878" height="328" key="GridCell.Tab.0.left/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597283952886" />
+    <state width="1238" height="196" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1597358632016" />
+    <state width="1238" height="196" key="GridCell.Tab.0.right" timestamp="1597358632017">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="197" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1596231645855" />
-    <state width="1238" height="305" key="GridCell.Tab.1.bottom" timestamp="1595810082166">
+    <state width="1878" height="328" key="GridCell.Tab.0.right/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597283952887" />
+    <state width="1238" height="196" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1597358632017" />
+    <state width="1238" height="305" key="GridCell.Tab.1.bottom" timestamp="1597355413085">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1595810082166" />
-    <state width="1238" height="305" key="GridCell.Tab.1.center" timestamp="1595810082166">
+    <state width="1238" height="305" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1597355413085" />
+    <state width="1238" height="305" key="GridCell.Tab.1.center" timestamp="1597355413084">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1595810082166" />
-    <state width="1238" height="305" key="GridCell.Tab.1.left" timestamp="1595810082166">
+    <state width="1238" height="305" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1597355413084" />
+    <state width="1238" height="305" key="GridCell.Tab.1.left" timestamp="1597355413084">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1595810082166" />
-    <state width="1238" height="305" key="GridCell.Tab.1.right" timestamp="1595810082166">
+    <state width="1238" height="305" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1597355413084" />
+    <state width="1238" height="305" key="GridCell.Tab.1.right" timestamp="1597355413085">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1595810082166" />
+    <state width="1238" height="305" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1597355413085" />
     <state x="149" y="50" key="SettingsEditor" timestamp="1595621667320">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="149" y="50" key="SettingsEditor/0.23.1280.777@0.23.1280.777" timestamp="1595621667320" />
+    <state x="100" y="123" width="1080" height="577" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1597264715815">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="100" y="123" width="1080" height="577" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1280.777@0.23.1280.777" timestamp="1597264715814" />
     <state x="429" y="335" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1595803240181">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -326,17 +350,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleMatrix.java</url>
-          <line>626</line>
+          <line>627</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleMatrix.java</url>
-          <line>615</line>
+          <line>616</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleMatrix.java</url>
-          <line>616</line>
+          <line>617</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
@@ -346,12 +370,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java</url>
-          <line>196</line>
+          <line>197</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java</url>
-          <line>379</line>
+          <line>387</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>

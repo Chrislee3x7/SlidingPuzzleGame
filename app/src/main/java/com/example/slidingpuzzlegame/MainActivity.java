@@ -18,8 +18,12 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final int NUMBER_OF_DIFFICULTIES = 4;
+    public static final int BASE_DIFFICULTY = 3;
+
     private GridLayout puzzleDisplay;
     private ImageButton homeSettingsButton;
+    private ImageButton specialStatsButton;
     private TextView title;
     private PuzzlePreStartFragment puzzlePreStartFragment;
     private FragmentPagerAdapter tipsPagerAdapter;
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         puzzleDisplay = (GridLayout) findViewById(R.id.home_screen_puzzle_display);
+        specialStatsButton = findViewById(R.id.special_stats_button);
+        specialStatsButton.setOnClickListener(this);
 //        homeSettingsButton = (ImageButton) findViewById(R.id.home_screen_settings_button);
         puzzleDisplay.setOnClickListener(this);
         title = (TextView) findViewById(R.id.game_title);
@@ -84,7 +90,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.home_screen_puzzle_display:
                 SoundPlayer.playLiquidDropClick(this);
                 openPreStartFragment();
+                break;
+            case R.id.special_stats_button:
+                SoundPlayer.playLiquidDropClick(this);
+                openStatisticsFragment();
+                break;
         }
+    }
+
+    public void openStatisticsFragment() {
+        // Create a new Fragment to be placed in the activity layout
+        final StatisticsFragment statisticsFragment = new StatisticsFragment();
+
+        // In case this activity was started with special instructions from an
+        // Intent, pass the Intent's extras to the fragment as arguments
+        //statisticsFragment.setArguments(getActivity().getIntent().getExtras());
+        // Add the fragment to the 'fragment_container' FrameLayout
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.activity_main, statisticsFragment).commit();
     }
 
     public void setPagerViews() {
@@ -101,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public TextView createPagerTextView(String text) {
         TextView textView = new TextView(getApplicationContext());
         textView.setBackgroundResource(R.drawable.play_button_background);
-        textView.setPadding(5,0,5,0);
+        textView.setPadding(30, 0, 30, 0);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView.setHeight(150);
         textView.setTextSize(18);

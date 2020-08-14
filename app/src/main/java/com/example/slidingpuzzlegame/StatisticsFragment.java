@@ -1,14 +1,23 @@
 package com.example.slidingpuzzlegame;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -26,7 +35,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     private View rootView;
 
     private Button resetRecordsButton;
-    private Button backButton;
+    private ImageButton backButton;
+    private LinearLayout recordsLinearLayout;
 
     private SharedPreferences sharedPreferences;
 
@@ -54,6 +64,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TransitionInflater inflater = TransitionInflater.from(requireContext());
+        setEnterTransition(inflater.inflateTransition(R.transition.slide_right));
+        setExitTransition(inflater.inflateTransition(R.transition.slide_right));
         if (getArguments() != null) {
         }
     }
@@ -62,24 +75,95 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_statistics, container, false);
+
+
+        recordsLinearLayout = rootView.findViewById(R.id.records_linear_layout);
         resetRecordsButton = rootView.findViewById(R.id.reset_records_button);
         resetRecordsButton.setOnClickListener(this);
         backButton = rootView.findViewById(R.id.statistics_page_back_button);
         backButton.setOnClickListener(this);
 
         sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+        inflateCards(inflater);
 
-        // Inflate the layout for this fragment
+
+
         return rootView;
+    }
+
+    public void updateCards() {
+        recordsLinearLayout.removeAllViews();
+        inflateCards(getLayoutInflater());
+    }
+
+    public void inflateCards(LayoutInflater inflater) {
+        for (int i = MainActivity.BASE_DIFFICULTY; i < MainActivity.NUMBER_OF_DIFFICULTIES + MainActivity.BASE_DIFFICULTY; i++) {
+            LinearLayout card = (LinearLayout) inflater.inflate(R.layout.stats_record_card, null);
+            recordsLinearLayout.addView(card);
+            LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            final float scale = getContext().getResources().getDisplayMetrics().density;
+            int pixels = (int) (10 * scale + 0.5f);
+            cardLayoutParams.setMargins(0,0, 0, pixels);
+            card.setLayoutParams(cardLayoutParams);
+            TextView cardDifficultyTitle = ((TextView) card.findViewById(R.id.card_difficulty));
+            TextView cardBestTime = ((TextView) card.findViewById(R.id.card_best_time));
+            TextView cardBestMovecount = ((TextView) card.findViewById(R.id.card_best_movecount));
+            switch (i) {
+                case 3:
+                    cardDifficultyTitle.setText(getString(R.string.difficulty3));
+                    break;
+                case 4:
+                    cardDifficultyTitle.setText(getString(R.string.difficulty4));
+                    break;
+                case 5:
+                    cardDifficultyTitle.setText(getString(R.string.difficulty5));
+                    break;
+                case 6:
+                    cardDifficultyTitle.setText(getString(R.string.difficulty6));
+                    break;
+            }
+            cardBestTime.setText(sharedPreferences
+                    .getString(getString(R.string.shared_preference_best_time) + i, "––:––:––"));
+            String bestMoveCountToSet = String.valueOf(sharedPreferences
+                    .getInt(getString(R.string.shared_preference_best_movecount) + i, 0));
+//
+            if (bestMoveCountToSet.equals("0")) {
+                bestMoveCountToSet = "–";
+            }
+            cardBestMovecount.setText(bestMoveCountToSet);
+        }
+    }
+
+    public void confirmResetRecords() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Reset?")
+                .setMessage("Do you really want to reset all records? Tapping OK will " +
+                        "confirm your choice to clear all of your personal bests!")
+                .setIcon(null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        SoundPlayer.playLiquidDropClick(getContext());
+                        resetRecords();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SoundPlayer.playLiquidDropClick(getContext());
+                    }
+                }).show();
     }
 
     public void resetRecords() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         for (int i = 2; i <= 6; i++) {
-            editor.remove("Best Time" + i);
-            editor.remove("Best Movecount" + i);
+            editor.remove(getString(R.string.shared_preference_best_time) + i);
+            editor.remove(getString(R.string.shared_preference_best_movecount) + i);
             editor.apply();
         }
+        Toast.makeText(getActivity().getApplicationContext(), "All records have been reset", Toast.LENGTH_SHORT).show();
+        updateCards();
     }
 
     public void close() {
@@ -91,7 +175,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.reset_records_button:
                 SoundPlayer.playLiquidDropClick(getContext());
-                resetRecords();
+                confirmResetRecords();
                 break;
             case R.id.statistics_page_back_button:
                 SoundPlayer.playLiquidDropClick(getContext());

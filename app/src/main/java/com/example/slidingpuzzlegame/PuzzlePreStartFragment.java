@@ -4,16 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +22,11 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,6 +83,9 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TransitionInflater inflater = TransitionInflater.from(requireContext());
+        setEnterTransition(inflater.inflateTransition(R.transition.slide_bottom));
+        setExitTransition(inflater.inflateTransition(R.transition.slide_bottom));
         if (getArguments() != null) {
         }
     }
@@ -170,6 +168,7 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
                 //close this fragment and go to the puzzle of the specified info
                 int difficulty = Integer.parseInt((Character.toString(difficultyDropdown.getSelectedItem().toString().charAt(0))));
                 openPuzzleFragment(difficulty);
+                close();
                 break;
 
             case R.id.image_preview_text:

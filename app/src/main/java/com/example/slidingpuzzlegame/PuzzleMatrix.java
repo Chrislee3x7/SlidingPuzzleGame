@@ -499,6 +499,7 @@ public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implem
     }
 
     public void animateScrambleAll() {
+        SoundPlayer.playScramble(context);
         for (int i = 0; i < pieceSlots; i++) {
             PuzzlePiece piece = solvedPuzzlePieces[i];
             if (piece == null) {

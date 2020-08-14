@@ -124,6 +124,16 @@
             android:text="8"
             android:textSize="30sp" />
 
+        <ImageButton
+            android:id="@+id/special_stats_button"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="1dp"
+            android:background="@drawable/special_puzzle_piece_background"
+            android:clickable="true"
+            android:src="@drawable/ic_bar_chart"
+            android:textSize="30sp" />
+
     </GridLayout>
 
     <LinearLayout

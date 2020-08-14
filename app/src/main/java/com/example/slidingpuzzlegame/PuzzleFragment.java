@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.transition.TransitionInflater;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -201,16 +202,16 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     }
 
     private String getBestTime() {
-        return sharedPreferences.getString("Best Time" + difficulty,
+        return sharedPreferences.getString(getString(R.string.shared_preference_best_time) + difficulty,
                 getString(R.string.default_time_value));
 
     }
 
     private String getBestMovecount() {
-        if (!sharedPreferences.contains("Best Movecount" + difficulty)) {
+        if (!sharedPreferences.contains(getString(R.string.shared_preference_best_movecount) + difficulty)) {
             return getString(R.string.default_movecount_value);
         }
-        return Integer.toString(sharedPreferences.getInt("Best Movecount" + difficulty, 0));
+        return Integer.toString(sharedPreferences.getInt(getString(R.string.shared_preference_best_movecount) + difficulty, 0));
     }
 
     private boolean isNewBestTime(String curentTime) {
@@ -248,6 +249,9 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TransitionInflater inflater = TransitionInflater.from(requireContext());
+        setEnterTransition(inflater.inflateTransition(R.transition.fade));
+        setExitTransition(inflater.inflateTransition(R.transition.fade));
     }
 
     @Override
@@ -318,8 +322,7 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
 
         darkenBackground = rootView.findViewById(R.id.darken_background);
-        bestTime = getBestTime();
-        bestMoveCount = getBestMovecount();
+        updateRecords();
 
         //pause menu stuff
         pauseMenu = (LinearLayout) rootView.findViewById(R.id.pause_menu);
@@ -340,6 +343,11 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
 //        scrambleButton.setOnClickListener(this);
         // Return the View for the fragment's UI.
         return rootView;
+    }
+
+    public void updateRecords() {
+        bestTime = getBestTime();
+        bestMoveCount = getBestMovecount();
     }
 
 
@@ -412,13 +420,10 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
                 darkenBackground.setVisibility(View.INVISIBLE);
                 puzzleMatrix.setMovementLocked(false);
                 pauseMenu.setVisibility(View.GONE);
+                updateRecords();
                 resumeStopwatch();
 
         }
-    }
-
-    public void updateRecords() {
-
     }
 
     public void openStatisticsFragment() {

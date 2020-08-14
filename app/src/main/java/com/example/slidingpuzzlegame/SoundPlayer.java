@@ -139,7 +139,7 @@ public class SoundPlayer {
 
     public static void playScramble(Context context) {
 
-        final MediaPlayer sound = MediaPlayer.create(context, R.raw.applause);
+        final MediaPlayer sound = MediaPlayer.create(context, R.raw.scramble_whoosh2);
         sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {

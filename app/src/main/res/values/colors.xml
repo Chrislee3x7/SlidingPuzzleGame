@@ -11,4 +11,5 @@
     <color name="black">#000000</color>
     <color name="darkened_background">#99000000</color>
     <color name="gray">#505050</color>
+    <color name="record_card_color">#33FFFFFF</color>
 </resources>
