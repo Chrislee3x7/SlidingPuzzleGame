@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,9 +35,14 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     // TODO: Rename and change types of parameters
     private View rootView;
 
+    private View statsLayout;
     private Button resetRecordsButton;
     private ImageButton backButton;
+
+
+    //record display stuff
     private LinearLayout recordsLinearLayout;
+    private LinearLayout[] recordCards = new LinearLayout[MainActivity.NUMBER_OF_DIFFICULTIES];
 
     private SharedPreferences sharedPreferences;
 
@@ -76,6 +82,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_statistics, container, false);
 
+        statsLayout = rootView.findViewById(R.id.stats_layout);
+        statsLayout.setOnClickListener(this);
 
         recordsLinearLayout = rootView.findViewById(R.id.records_linear_layout);
         resetRecordsButton = rootView.findViewById(R.id.reset_records_button);
@@ -85,7 +93,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
         sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
         inflateCards(inflater);
-
 
 
         return rootView;
@@ -99,15 +106,20 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public void inflateCards(LayoutInflater inflater) {
         for (int i = MainActivity.BASE_DIFFICULTY; i < MainActivity.NUMBER_OF_DIFFICULTIES + MainActivity.BASE_DIFFICULTY; i++) {
             LinearLayout card = (LinearLayout) inflater.inflate(R.layout.stats_record_card, null);
+            recordCards[i - MainActivity.BASE_DIFFICULTY] = card;
             recordsLinearLayout.addView(card);
+            card.setOnClickListener(this);
+
             LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             final float scale = getContext().getResources().getDisplayMetrics().density;
             int pixels = (int) (10 * scale + 0.5f);
-            cardLayoutParams.setMargins(0,0, 0, pixels);
+            cardLayoutParams.setMargins(0, 0, 0, pixels);
             card.setLayoutParams(cardLayoutParams);
+
             TextView cardDifficultyTitle = ((TextView) card.findViewById(R.id.card_difficulty));
             TextView cardBestTime = ((TextView) card.findViewById(R.id.card_best_time));
             TextView cardBestMovecount = ((TextView) card.findViewById(R.id.card_best_movecount));
+
             switch (i) {
                 case 3:
                     cardDifficultyTitle.setText(getString(R.string.difficulty3));
@@ -122,11 +134,12 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                     cardDifficultyTitle.setText(getString(R.string.difficulty6));
                     break;
             }
+
             cardBestTime.setText(sharedPreferences
                     .getString(getString(R.string.shared_preference_best_time) + i, "––:––:––"));
             String bestMoveCountToSet = String.valueOf(sharedPreferences
                     .getInt(getString(R.string.shared_preference_best_movecount) + i, 0));
-//
+
             if (bestMoveCountToSet.equals("0")) {
                 bestMoveCountToSet = "–";
             }
@@ -181,6 +194,44 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 SoundPlayer.playLiquidDropClick(getContext());
                 close();
                 break;
+            case R.id.record_card:
+                SoundPlayer.playLiquidDropClick(getContext());
+                LinearLayout card = ((LinearLayout) view);
+                deselectAllOtherCards(card);
+                toggleCardSelected(card);
+                break;
+            default:
+                deselectAllCards();
         }
     }
+
+    public void toggleCardSelected(LinearLayout card) {
+        int numberOfChildren = card.getChildCount();
+        View resetButton = card.getChildAt(numberOfChildren - 1);
+        if (resetButton.getVisibility() == View.VISIBLE) {
+            resetButton.setVisibility(View.GONE);
+            return;
+        }
+        resetButton.setVisibility(View.VISIBLE);
+    }
+
+    public void deselectAllCards() {
+        final int resetButtonIndex = 4;
+        for (int i = 0; i < recordsLinearLayout.getChildCount(); i++) {
+            ((LinearLayout) recordsLinearLayout.getChildAt(i)).getChildAt(resetButtonIndex).setVisibility(View.GONE);
+        }
+    }
+
+    public void deselectAllOtherCards(LinearLayout exceptionCard) {
+        final int resetButtonIndex = 4;
+        for (int i = 0; i < recordsLinearLayout.getChildCount(); i++) {
+            LinearLayout currentCard = ((LinearLayout) recordsLinearLayout.getChildAt(i));
+            if (currentCard == exceptionCard) {
+                continue;
+            }
+            //hide button
+            currentCard.getChildAt(resetButtonIndex).setVisibility(View.GONE);
+        }
+    }
+
 }
