@@ -10,14 +10,36 @@
     android:paddingHorizontal="10dp"
     android:paddingVertical="5dp">
 
-    <TextView
-        android:id="@+id/card_difficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="3dp"
-        android:text="@string/difficulty3"
-        android:textSize="25dp"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/card_difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="3dp"
+            android:text="@string/difficulty3"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/individual_reset_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/ic_reset_mini"
+
+            android:padding="5dp"
+            android:textAllCaps="false"
+            android:visibility="visible" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="wrap_content"
@@ -73,15 +95,15 @@
 
     <!--        android:layout_width="80dp"-->
     <!--        android:layout_height="40dp"-->
-    <Button
-        android:id="@+id/individual_reset_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:background="@drawable/stopwatch_background"
-        android:padding="10dp"
-        android:text="Reset"
-        android:visibility="gone"
-        android:textAllCaps="false" />
+<!--    <Button-->
+<!--        android:id="@+id/individual_reset_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:background="@drawable/stopwatch_background"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="Reset"-->
+<!--        android:textAllCaps="false"-->
+<!--        android:visibility="gone" />-->
 
 </LinearLayout>

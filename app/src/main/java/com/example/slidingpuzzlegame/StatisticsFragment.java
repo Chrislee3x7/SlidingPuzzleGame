@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 
 import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,8 +16,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -109,6 +106,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
             recordCards[i - MainActivity.BASE_DIFFICULTY] = card;
             recordsLinearLayout.addView(card);
             card.setOnClickListener(this);
+            card.findViewById(R.id.individual_reset_button).setOnClickListener(this);
 
             LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             final float scale = getContext().getResources().getDisplayMetrics().density;
@@ -149,15 +147,17 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
     public void confirmResetRecords() {
         new AlertDialog.Builder(getContext())
-                .setTitle("Reset?")
+                .setTitle("Reset All?")
                 .setMessage("Do you really want to reset all records? Tapping OK will " +
-                        "confirm your choice to clear all of your personal bests!")
+                        "confirm your choice to clear all of your current standings!")
                 .setIcon(null)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         SoundPlayer.playLiquidDropClick(getContext());
-                        resetRecords();
+                        resetAllRecords();
+                        Toast.makeText(getActivity().getApplicationContext(),
+                                "All records have been reset", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -168,14 +168,44 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 }).show();
     }
 
-    public void resetRecords() {
+    public void resetAllRecords() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         for (int i = 2; i <= 6; i++) {
             editor.remove(getString(R.string.shared_preference_best_time) + i);
             editor.remove(getString(R.string.shared_preference_best_movecount) + i);
             editor.apply();
         }
-        Toast.makeText(getActivity().getApplicationContext(), "All records have been reset", Toast.LENGTH_SHORT).show();
+        updateCards();
+    }
+
+    public void confirmResetRecord(final int difficulty) {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Reset " + difficulty + " x " + difficulty + "?")
+                .setMessage("Do you really want to reset the records for this difficulty? Tapping OK will " +
+                        "confirm your choice to clear your current " + difficulty + " x " + difficulty + " standings!")
+                .setIcon(null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        SoundPlayer.playLiquidDropClick(getContext());
+                        resetRecord(difficulty);
+                        Toast.makeText(getActivity().getApplicationContext(),
+                                difficulty + " x " + difficulty + " records have been reset", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SoundPlayer.playLiquidDropClick(getContext());
+                    }
+                }).show();
+    }
+
+    public void resetRecord(int difficulty) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(getString(R.string.shared_preference_best_time) + difficulty);
+        editor.remove(getString(R.string.shared_preference_best_movecount) + difficulty);
+        editor.apply();
         updateCards();
     }
 
@@ -195,14 +225,30 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 close();
                 break;
             case R.id.record_card:
+//                SoundPlayer.playLiquidDropClick(getContext());
+//                LinearLayout card = ((LinearLayout) view);
+//                deselectAllOtherCards(card);
+//                toggleCardSelected(card);
+                break;
+            case R.id.individual_reset_button:
                 SoundPlayer.playLiquidDropClick(getContext());
-                LinearLayout card = ((LinearLayout) view);
-                deselectAllOtherCards(card);
-                toggleCardSelected(card);
+                //getting hte card which has a linear layout (where the pressed button is) within another ll
+                //which is the one we want
+                LinearLayout card = (LinearLayout) view.getParent().getParent();
+                confirmResetRecord(getCardDifficulty(card));
                 break;
             default:
-                deselectAllCards();
+//                deselectAllCards();
         }
+    }
+
+    public int getCardDifficulty(LinearLayout card) {
+        for (int i = 0; i < recordCards.length; i++) {
+            if (recordCards[i] == card) {
+                return i + MainActivity.BASE_DIFFICULTY;
+            }
+        }
+        return 0;
     }
 
     public void toggleCardSelected(LinearLayout card) {

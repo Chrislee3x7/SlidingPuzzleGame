@@ -111,14 +111,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setPagerViews() {
-        pagerViews = new TextView[4];
-        pagerViews[0] = createPagerTextView("Welcome to Sliding Puzzle game! Hope you enjoy!" +
+        pagerViews = new TextView[6];
+        pagerViews[0] = createPagerTextView("Welcome to Sliding Puzzle Game! Hope you enjoy!" +
                 " Swipe to see some tips!");
-        pagerViews[1] = createPagerTextView("Try tapping a tile to move " +
+        pagerViews[1] = createPagerTextView("You can tap a tile to move " +
                 "it to the open location!");
-        pagerViews[2] = createPagerTextView("You can also move multiple pieces at once!");
+        pagerViews[2] = createPagerTextView("Try moving multiple pieces at once!");
         pagerViews[3] = createPagerTextView("By starting in the blank spot, you can swipe through multiple " +
                 "pieces to solve quickly!");
+        pagerViews[4] = createPagerTextView("Check out your records for each puzzle in the Statistics page!");
+        pagerViews[5] = createPagerTextView("Want a fresh start? You can reset your current standings in the" +
+                " Statistics page!");
     }
 
     public TextView createPagerTextView(String text) {
