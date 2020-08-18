@@ -1,20 +1,15 @@
 package com.example.slidingpuzzlegame;
 
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton specialStatsButton;
     private TextView title;
     private PuzzlePreStartFragment puzzlePreStartFragment;
-    private FragmentPagerAdapter tipsPagerAdapter;
+    private LoopingPagerAdapter loopingPagerAdapter;
 
     //pager stuff
     private LinearLayout tipsPanel;
@@ -35,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View[] pagerDotsArray;
     private TextView[] pagerViews;
 
+    private AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);
+    private AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         puzzleDisplay = (GridLayout) findViewById(R.id.home_screen_puzzle_display);
         specialStatsButton = findViewById(R.id.special_stats_button);
         specialStatsButton.setOnClickListener(this);
+
+        fadeIn.setDuration(500);
+        fadeOut.setDuration(500);
+        //fade.setRepeatMode(Animation.REVERSE);
+
 //        homeSettingsButton = (ImageButton) findViewById(R.id.home_screen_settings_button);
         puzzleDisplay.setOnClickListener(this);
         title = (TextView) findViewById(R.id.game_title);
@@ -56,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void openPreStartFragment() {
+        puzzleDisplay.startAnimation(fadeOut);
+        tipsPanel.startAnimation(fadeOut);
+        title.startAnimation(fadeOut);
+
         puzzleDisplay.setVisibility(View.GONE);
 //        homeSettingsButton.setVisibility(View.GONE);
         tipsPanel.setVisibility(View.GONE);
@@ -72,9 +79,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void showMainMenu() {
+        puzzleDisplay.startAnimation(fadeIn);
+        tipsPanel.startAnimation(fadeIn);
+        title.startAnimation(fadeIn);
+
         puzzleDisplay.setVisibility(View.VISIBLE);
         tipsPanel.setVisibility(View.VISIBLE);
         title.setVisibility(View.VISIBLE);
+
+
 //        homeSettingsButton.setVisibility(View.VISIBLE);
     }
 
@@ -111,17 +124,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setPagerViews() {
-        pagerViews = new TextView[6];
-        pagerViews[0] = createPagerTextView("Welcome to Sliding Puzzle Game! Hope you enjoy!" +
-                " Swipe to see some tips!");
-        pagerViews[1] = createPagerTextView("You can tap a tile to move " +
-                "it to the open location!");
-        pagerViews[2] = createPagerTextView("Try moving multiple pieces at once!");
-        pagerViews[3] = createPagerTextView("By starting in the blank spot, you can swipe through multiple " +
-                "pieces to solve quickly!");
-        pagerViews[4] = createPagerTextView("Check out your records for each puzzle in the Statistics page!");
-        pagerViews[5] = createPagerTextView("Want a fresh start? You can reset your current standings in the" +
+        pagerViews = new TextView[8];
+        int i = 0;
+        pagerViews[i++] = createPagerTextView("Want a fresh start? You can reset your current standings in the" +
                 " Statistics page!");
+        pagerViews[i++] = createPagerTextView("Welcome to Sliding Puzzle Game! Hope you enjoy!" +
+                " Swipe to see some tips!");
+        pagerViews[i++] = createPagerTextView("You can tap a tile to move " +
+                "it to the open location!");
+        pagerViews[i++] = createPagerTextView("Try moving multiple pieces at once!");
+        pagerViews[i++] = createPagerTextView("By starting in the blank spot, you can swipe through multiple " +
+                "pieces to solve quickly!");
+        pagerViews[i++] = createPagerTextView("Check out your records for each puzzle in the Statistics page!");
+        pagerViews[i++] = createPagerTextView("Want a fresh start? You can reset your current standings in the" +
+                " Statistics page!");
+        pagerViews[i++] = createPagerTextView("Welcome to Sliding Puzzle Game! Hope you enjoy!" +
+                " Swipe to see some tips!");
     }
 
     public TextView createPagerTextView(String text) {
@@ -140,67 +158,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tipsViewPager.setPageMargin(80);
         pagerDots = findViewById(R.id.pager_dots);
 
-        tipsViewPager.setAdapter(new PagerAdapter() {
+        loopingPagerAdapter = new LoopingPagerAdapter(pagerViews, getApplicationContext());
 
-            @Override
-            public Object instantiateItem(ViewGroup collection, int position) {
-                TextView textViewToAdd = pagerViews[position];
-                textViewToAdd.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                textViewToAdd.setGravity(Gravity.CENTER);
-                collection.addView(textViewToAdd);
-                return textViewToAdd;
-            }
-
-            @Override
-            public int getCount() {
-                return pagerViews.length;
-            }
-
-            @Override
-            public boolean isViewFromObject(View view, Object object) {
-                return view == object;
-            }
-
-            @Override
-            public void destroyItem(ViewGroup collection, int position, Object view) {
-                collection.removeView((View) view);
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return "hello";
-            }
-        });
+        tipsViewPager.setAdapter(loopingPagerAdapter);
 
         setupPagerIndicatorDots();
 
-        pagerDotsArray[0].setBackgroundResource(R.drawable.selected_dot);
+        pagerDotsArray[1].setBackgroundResource(R.drawable.selected_dot);
 
         tipsViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            private int truePosition;
+            private int previousPosition = -1;
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
             @Override
             public void onPageSelected(int position) {
-                SoundPlayer.playWhoosh(getApplicationContext());
+//                Toast.makeText(getApplicationContext(), "page selected", Toast.LENGTH_SHORT).show();
+                truePosition = position;
+
+
+//                Toast.makeText(getApplicationContext(), position, Toast.LENGTH_SHORT).show();
+                if (position == 0) {
+                    previousPosition = position;
+                    position = 6;
+                }
+                if (position == pagerViews.length - 1) {
+                    previousPosition = position;
+                    position = 1;
+                }
+                //alterdpostion is when 0 -> 6 or 7 -> 1
+                if (previousPosition != position) {
+                    SoundPlayer.playWhoosh(getApplicationContext());
+                }
+
                 for (int i = 0; i < pagerDotsArray.length; i++) {
+                    if (i == 0 || i == pagerViews.length - 1) {
+                        continue;
+                    }
                     pagerDotsArray[i].setBackgroundResource(R.drawable.unselected_dot);
                 }
-                pagerDotsArray[position].setBackgroundResource(R.drawable.selected_dot);
+                if (position != 0 && position != pagerViews.length - 1) {
+                    pagerDotsArray[position].setBackgroundResource(R.drawable.selected_dot);
+                    //SoundPlayer.playWhoosh(getApplicationContext());
+                }
+                previousPosition = position;
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+//                Toast.makeText(getApplicationContext(), "scroll state changed", Toast.LENGTH_SHORT).show();
+                if ((truePosition == 0) && state == ViewPager.SCROLL_STATE_IDLE) {
+                    tipsViewPager.setCurrentItem(pagerViews.length - 2, false);
+//                    SoundPlayer.playWhoosh(getApplicationContext());
+                } else if ((truePosition == pagerViews.length - 1) && state == ViewPager.SCROLL_STATE_IDLE) {
+                    tipsViewPager.setCurrentItem(1, false);
+//                    SoundPlayer.playWhoosh(getApplicationContext());
+                }
             }
         });
+        tipsViewPager.setCurrentItem(1, false);
     }
 
     private void setupPagerIndicatorDots() {
         //number of tips or banners to display
         pagerDotsArray = new View[pagerViews.length];
         for (int i = 0; i < pagerDotsArray.length; i++) {
+            if (i == 0 || i == pagerViews.length - 1) {
+                continue;
+            }
             pagerDotsArray[i] = new View(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);

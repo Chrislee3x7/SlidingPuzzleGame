@@ -1,7 +1,10 @@
 package com.example.slidingpuzzlegame;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,9 +18,11 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -67,6 +72,8 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     private ImageButton endScreenStatsButton;
     private ImageButton endScreenHomeButton;
     private ImageButton endScreenRetryButton;
+    private ImageView bestIconTime;
+    private ImageView bestIconMovecount;
 
 
     private String bestTime;
@@ -82,6 +89,11 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     private View darkenBackground;
 
     private SharedPreferences sharedPreferences;
+
+    private MyReceiver broadcastReceiver;
+
+    private AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);
+    private AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f);
 
 
     public PuzzleFragment() {
@@ -179,12 +191,14 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
             boolean isNewBestTime = isNewBestTime(currentTime);
             boolean isNewBestMovecount = isNewBestMovecount(currentMovecount);
             if (isNewBestTime) {
+                bestIconTime.setVisibility(View.VISIBLE);
                 bestTime = currentTime;
                 endScreenTimeBest.setText(currentTime);
                 editor.putString("Best Time" + difficulty, stopwatch.getText().toString());
                 editor.apply();
             }
             if (isNewBestMovecount) {
+                bestIconMovecount.setVisibility(View.VISIBLE);
                 bestMoveCount = currentMovecount;
                 editor.putInt("Best Movecount" + difficulty, Integer.parseInt(movecount.getText().toString()));
                 editor.apply();
@@ -252,6 +266,8 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         TransitionInflater inflater = TransitionInflater.from(requireContext());
         setEnterTransition(inflater.inflateTransition(R.transition.fade));
         setExitTransition(inflater.inflateTransition(R.transition.fade));
+        fadeIn.setDuration(500);
+        fadeOut.setDuration(500);
     }
 
     @Override
@@ -320,6 +336,8 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         endScreenStatsButton = (ImageButton) rootView.findViewById(R.id.stats_button);
         endScreenStatsButton.setOnClickListener(this);
         sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+        bestIconTime = rootView.findViewById(R.id.best_icon_time);
+        bestIconMovecount = rootView.findViewById(R.id.best_icon_movecount);
 
         darkenBackground = rootView.findViewById(R.id.darken_background);
         updateRecords();
@@ -338,6 +356,12 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
 //        pauseMenuOptionsButton.setOnClickListener(this);
         darkenBackground = rootView.findViewById(R.id.darken_background);
         darkenBackground.setOnClickListener(this);
+
+        broadcastReceiver = new MyReceiver();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        getActivity().registerReceiver(broadcastReceiver, filter);
+
 
         //        scrambleButton = rootView.findViewById(R.id.scramble_button);
 //        scrambleButton.setOnClickListener(this);

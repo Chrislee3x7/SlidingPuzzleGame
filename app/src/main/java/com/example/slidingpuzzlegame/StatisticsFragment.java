@@ -2,6 +2,7 @@ package com.example.slidingpuzzlegame;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -178,6 +179,8 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         updateCards();
     }
 
+
+
     public void confirmResetRecord(final int difficulty) {
         new AlertDialog.Builder(getContext())
                 .setTitle("Reset " + difficulty + " x " + difficulty + "?")
@@ -188,9 +191,9 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         SoundPlayer.playLiquidDropClick(getContext());
-                        resetRecord(difficulty);
-                        Toast.makeText(getActivity().getApplicationContext(),
+                        resetRecord(difficulty);Toast.makeText(getActivity().getApplicationContext(),
                                 difficulty + " x " + difficulty + " records have been reset", Toast.LENGTH_SHORT).show();
+
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -218,6 +221,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.reset_records_button:
                 SoundPlayer.playLiquidDropClick(getContext());
+                broadcastIntent(view);
                 confirmResetRecords();
                 break;
             case R.id.statistics_page_back_button:
@@ -235,11 +239,19 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
                 //getting hte card which has a linear layout (where the pressed button is) within another ll
                 //which is the one we want
                 LinearLayout card = (LinearLayout) view.getParent().getParent();
+                broadcastIntent(view);
                 confirmResetRecord(getCardDifficulty(card));
                 break;
             default:
 //                deselectAllCards();
         }
+    }
+
+    public void broadcastIntent(View view){
+//        Toast.makeText(getContext(), "broadcasted", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setAction("com.example.slidingpuzzlegame");
+        getActivity().sendBroadcast(intent);
     }
 
     public int getCardDifficulty(LinearLayout card) {

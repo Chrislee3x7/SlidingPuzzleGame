@@ -79,8 +79,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Downloads/sliding_puzzle_game_blank.png" />
-                                                <entry key="scalingPercent" value="45" />
+                                                <entry key="imagePath" value="$USER_HOME$/Downloads/Sliding Puzzle Game Icon.png" />
+                                                <entry key="scalingPercent" value="82" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -113,7 +113,6 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="ffffff" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -303,8 +302,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_reset_mini" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/ic_reset_mini.svg" />
+                            <entry key="outputName" value="ic_new_record_icon2" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/app/src/main/res/drawable/new_record_icon2.svg" />
                           </map>
                         </option>
                       </PersistentState>

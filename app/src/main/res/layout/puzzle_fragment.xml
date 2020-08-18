@@ -56,11 +56,11 @@
 
             <ImageButton
                 android:id="@+id/pause_button"
-                android:layout_marginHorizontal="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
                 android:background="@drawable/stopwatch_background"
-                android:src="@drawable/ic_pause"/>
+                android:src="@drawable/ic_pause" />
 
         </LinearLayout>
 
@@ -76,10 +76,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/puzzle_background"
+                android:clickable="true"
                 android:columnCount="4"
                 android:padding="3dp"
-                android:rowCount="4"
-                android:clickable="true">
+                android:rowCount="4">
                 <!--            android:layout_marginBottom="80dp"-->
                 <!--        android:layout_marginHorizontal="14dp"-->
             </GridLayout>
@@ -109,18 +109,18 @@
 
     <View
         android:id="@+id/darken_background"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/darkened_background" />
+        android:background="@color/darkened_background"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/end_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:background="@drawable/play_button_background"
         android:orientation="vertical"
-        android:layout_marginHorizontal="50dp"
         android:paddingHorizontal="30dp"
         android:paddingVertical="30dp"
         android:visibility="gone"
@@ -190,12 +190,27 @@
 
             <TableRow>
 
-                <TextView
-                    android:paddingTop="0dp"
-                    android:text="Best:"
-                    android:textAlignment="viewEnd"
-                    android:textSize="18dp"
-                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/best_icon_time"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_new_record_icon2"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:layout_height="40dp"
+                        android:layout_width="match_parent"
+                        android:paddingTop="0dp"
+                        android:text="Best:"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:textStyle="italic" />
+                </LinearLayout>
 
                 <Space
                     android:layout_width="0dp"
@@ -237,12 +252,28 @@
 
             <TableRow>
 
-                <TextView
-                    android:paddingTop="0dp"
-                    android:text="Best:"
-                    android:textAlignment="viewEnd"
-                    android:textSize="18dp"
-                    android:textStyle="italic" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+
+                    <ImageView
+                        android:id="@+id/best_icon_movecount"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_new_record_icon2"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:layout_height="40dp"
+                        android:layout_width="match_parent"
+                        android:paddingTop="0dp"
+                        android:text="Best:"
+                        android:textAlignment="center"
+                        android:textSize="18dp"
+                        android:textStyle="italic" />
+                </LinearLayout>
 
                 <Space
                     android:layout_width="0dp"
@@ -263,10 +294,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="horizontal"
             android:paddingHorizontal="10dp"
-            android:paddingTop="20dp"
-            android:layout_gravity="center">
+            android:paddingTop="20dp">
 
             <ImageButton
                 android:id="@+id/stats_button"
@@ -311,16 +342,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/play_button_background"
+        android:clickable="true"
         android:orientation="vertical"
         android:paddingHorizontal="30dp"
         android:paddingVertical="30dp"
         android:visibility="gone"
-        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/pause_menu_title"
@@ -377,31 +407,31 @@
                 android:textAllCaps="false"
                 android:textSize="20dp" />
 
-<!--            <Button-->
-<!--                android:id="@+id/pause_menu_options_button"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginVertical="5dp"-->
-<!--                android:background="@drawable/stopwatch_background"-->
-<!--                android:drawableStart="@drawable/ic_settings_mini"-->
-<!--                android:padding="5dp"-->
-<!--                android:text="@string/options"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textSize="20dp" />-->
+            <!--            <Button-->
+            <!--                android:id="@+id/pause_menu_options_button"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginVertical="5dp"-->
+            <!--                android:background="@drawable/stopwatch_background"-->
+            <!--                android:drawableStart="@drawable/ic_settings_mini"-->
+            <!--                android:padding="5dp"-->
+            <!--                android:text="@string/options"-->
+            <!--                android:textAllCaps="false"-->
+            <!--                android:textSize="20dp" />-->
 
-<!--            no longer using this-->
+            <!--            no longer using this-->
 
-<!--            <Button-->
-<!--                android:id="@+id/pause_menu_back_button"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginVertical="5dp"-->
-<!--                android:background="@drawable/stopwatch_background"-->
-<!--                android:drawableStart="@drawable/ic_navigate_before_mini"-->
-<!--                android:padding="5dp"-->
-<!--                android:text="@string/back"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textSize="20dp" />-->
+            <!--            <Button-->
+            <!--                android:id="@+id/pause_menu_back_button"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginVertical="5dp"-->
+            <!--                android:background="@drawable/stopwatch_background"-->
+            <!--                android:drawableStart="@drawable/ic_navigate_before_mini"-->
+            <!--                android:padding="5dp"-->
+            <!--                android:text="@string/back"-->
+            <!--                android:textAllCaps="false"-->
+            <!--                android:textSize="20dp" />-->
 
 
         </LinearLayout>
