@@ -307,7 +307,7 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
     public void broadcastIntent(View view) {
 //        Toast.makeText(getContext(), "broadcasted", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
-        intent.setAction("com.example.slidingpuzzlegame");
+        intent.setAction("com.chrislee3x7.slidingpuzzlegame");
         getActivity().sendBroadcast(intent);
     }
 
