@@ -1,12 +1,9 @@
-package com.example.slidingpuzzlegame;
+package com.chrislee3x7.slidingpuzzlegame;
 
 import android.animation.Animator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect;
-import android.view.DragEvent;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,15 +12,10 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.Stack;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Handler;
 
 
 public class PuzzleMatrix extends GestureDetector.SimpleOnGestureListener implements View.OnClickListener, View.OnTouchListener {

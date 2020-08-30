@@ -1,4 +1,4 @@
-package com.example.slidingpuzzlegame;
+package com.chrislee3x7.slidingpuzzlegame;
 
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +18,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 
 import static android.content.Context.MODE_PRIVATE;
 

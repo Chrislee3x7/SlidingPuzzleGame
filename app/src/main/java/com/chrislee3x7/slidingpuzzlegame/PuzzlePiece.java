@@ -1,7 +1,6 @@
-package com.example.slidingpuzzlegame;
+package com.chrislee3x7.slidingpuzzlegame;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -10,13 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.Toast;
-
-import androidx.core.view.MotionEventCompat;
 
 public class PuzzlePiece extends androidx.appcompat.widget.AppCompatButton
         implements View.OnClickListener, View.OnTouchListener, View.OnDragListener {

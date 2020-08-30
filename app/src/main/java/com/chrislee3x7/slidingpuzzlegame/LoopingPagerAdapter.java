@@ -1,4 +1,4 @@
-package com.example.slidingpuzzlegame;
+package com.chrislee3x7.slidingpuzzlegame;
 
 import android.content.Context;
 import android.view.Gravity;

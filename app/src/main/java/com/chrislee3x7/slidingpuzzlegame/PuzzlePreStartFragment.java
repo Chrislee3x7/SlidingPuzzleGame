@@ -1,9 +1,8 @@
-package com.example.slidingpuzzlegame;
+package com.chrislee3x7.slidingpuzzlegame;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
