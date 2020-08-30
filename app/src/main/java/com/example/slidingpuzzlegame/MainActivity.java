@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void showMainMenu() {
+        tipsViewPager.setCurrentItem(1, false);
         puzzleDisplay.startAnimation(fadeIn);
         tipsPanel.startAnimation(fadeIn);
         title.startAnimation(fadeIn);
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         puzzleDisplay.setVisibility(View.VISIBLE);
         tipsPanel.setVisibility(View.VISIBLE);
         title.setVisibility(View.VISIBLE);
+        setClickable(true);
 
 
 //        homeSettingsButton.setVisibility(View.VISIBLE);
@@ -97,15 +99,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //playButton.setVisibility(View.VISIBLE);
     }
 
+    public void setClickable(boolean clickable) {
+        specialStatsButton.setClickable(clickable);
+        puzzleDisplay.setClickable(clickable);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_screen_puzzle_display:
                 SoundPlayer.playLiquidDropClick(this);
+                setClickable(false);
                 openPreStartFragment();
                 break;
             case R.id.special_stats_button:
                 SoundPlayer.playLiquidDropClick(this);
+                setClickable(false);
                 openStatisticsFragment();
                 break;
         }

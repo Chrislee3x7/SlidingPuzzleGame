@@ -9,14 +9,12 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Statis" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df4806f6-5214-4637-8865-6bc33783fe34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/LoopingPagerAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/MyReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_new_record_icon2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/new_record_icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -27,31 +25,16 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/ic_launcher-playstore.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/ic_launcher-playstore.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePreStartFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzlePreStartFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/StatisticsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/StatisticsFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/puzzle_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/puzzle_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/ic_launcher_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/stats_record_card.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/stats_record_card.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,11 +253,11 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="228" y="173" key="AndroidCreateResourceFileDialog/0.23.1280.777@0.23.1280.777" timestamp="1597362045735" />
-    <state x="423" y="-809" key="AndroidCreateXmlResourceDialog" timestamp="1597282560952">
-      <screen x="-326" y="-1177" width="1920" height="1177" />
+    <state x="499" y="266" key="AndroidCreateXmlResourceDialog" timestamp="1598155057555">
+      <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="423" y="-809" key="AndroidCreateXmlResourceDialog/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597282560952" />
-    <state x="499" y="266" key="AndroidCreateXmlResourceDialog/0.23.1280.777@0.23.1280.777" timestamp="1597171156949" />
+    <state x="499" y="266" key="AndroidCreateXmlResourceDialog/0.23.1280.777@0.23.1280.777" timestamp="1598155057555" />
     <state x="503" y="184" key="AndroidProcessChooserDialog" timestamp="1595279404461">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -283,42 +266,42 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="184" y="23" key="CommitChangelistDialog2/0.23.1280.777@0.23.1280.777" timestamp="1597170638665" />
-    <state width="1238" height="196" key="GridCell.Tab.0.bottom" timestamp="1597775802257">
+    <state width="1238" height="196" key="GridCell.Tab.0.bottom" timestamp="1598323172903">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1878" height="328" key="GridCell.Tab.0.bottom/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597283952888" />
-    <state width="1238" height="196" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1597775802257" />
-    <state width="1238" height="196" key="GridCell.Tab.0.center" timestamp="1597775802256">
+    <state width="1238" height="196" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1598323172903" />
+    <state width="1238" height="196" key="GridCell.Tab.0.center" timestamp="1598323172902">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1878" height="328" key="GridCell.Tab.0.center/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597283952886" />
-    <state width="1238" height="196" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1597775802256" />
-    <state width="1238" height="196" key="GridCell.Tab.0.left" timestamp="1597775802256">
+    <state width="1238" height="196" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1598323172902" />
+    <state width="1238" height="196" key="GridCell.Tab.0.left" timestamp="1598323172902">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1878" height="328" key="GridCell.Tab.0.left/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597283952886" />
-    <state width="1238" height="196" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1597775802256" />
-    <state width="1238" height="196" key="GridCell.Tab.0.right" timestamp="1597775802257">
+    <state width="1238" height="196" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1598323172902" />
+    <state width="1238" height="196" key="GridCell.Tab.0.right" timestamp="1598323172903">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1878" height="328" key="GridCell.Tab.0.right/0.23.1280.777/-326.-1177.1920.1177@-326.-1177.1920.1177" timestamp="1597283952887" />
-    <state width="1238" height="196" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1597775802257" />
-    <state width="1238" height="305" key="GridCell.Tab.1.bottom" timestamp="1597703798952">
+    <state width="1238" height="196" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1598323172903" />
+    <state width="1238" height="305" key="GridCell.Tab.1.bottom" timestamp="1598323172880">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1597703798952" />
-    <state width="1238" height="305" key="GridCell.Tab.1.center" timestamp="1597703798952">
+    <state width="1238" height="305" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1598323172880" />
+    <state width="1238" height="305" key="GridCell.Tab.1.center" timestamp="1598323172879">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1597703798952" />
-    <state width="1238" height="305" key="GridCell.Tab.1.left" timestamp="1597703798951">
+    <state width="1238" height="305" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1598323172879" />
+    <state width="1238" height="305" key="GridCell.Tab.1.left" timestamp="1598323172879">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1597703798951" />
-    <state width="1238" height="305" key="GridCell.Tab.1.right" timestamp="1597703798952">
+    <state width="1238" height="305" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1598323172879" />
+    <state width="1238" height="305" key="GridCell.Tab.1.right" timestamp="1598323172880">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="1238" height="305" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1597703798952" />
+    <state width="1238" height="305" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1598323172880" />
     <state x="149" y="50" key="SettingsEditor" timestamp="1595621667320">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
@@ -365,27 +348,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java</url>
-          <line>211</line>
+          <line>225</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java</url>
-          <line>411</line>
+          <line>554</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/StatisticsFragment.java</url>
-          <line>259</line>
+          <line>322</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/StatisticsFragment.java</url>
-          <line>258</line>
+          <line>321</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/StatisticsFragment.java</url>
-          <line>252</line>
+          <line>315</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
@@ -394,9 +377,14 @@
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/LoopingPagerAdapter.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="54" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java</url>
+          <line>381</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/slidingpuzzlegame/PuzzleFragment.java</url>
+          <line>373</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

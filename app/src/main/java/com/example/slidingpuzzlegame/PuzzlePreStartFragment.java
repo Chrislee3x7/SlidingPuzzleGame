@@ -3,6 +3,7 @@ package com.example.slidingpuzzlegame;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -133,12 +134,10 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
         bundle.putInt("Difficulty", difficulty);
         if (selectedImageUri == null) {
             imageUri = null;
-            bundle.putString("Selected Image", imageUri);
-        }
-        else {
+        } else {
             imageUri = selectedImageUri.toString();
-            bundle.putString("Selected Image", imageUri);
         }
+        bundle.putString("Selected Image", imageUri);
         puzzleFragment.setArguments(bundle);
         // Add the fragment to the 'fragment_container' FrameLayout
         getActivity().getSupportFragmentManager().beginTransaction()
@@ -176,21 +175,6 @@ public class PuzzlePreStartFragment extends Fragment implements View.OnClickList
                 Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 startActivityForResult(gallery, PICK_IMAGE);
                 break;
-//            case R.id.choose_photo_button:
-//                SoundPlayer.playLiquidDropClick(getContext());
-//                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-//                startActivityForResult(gallery, PICK_IMAGE);
-//                break;
-
-//            case R.id.take_photo_button:
-//                //now used currently
-//                SoundPlayer.playLiquidDropClick(getContext());
-//                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-//                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//                }
-//                break;
-
         }
     }
 

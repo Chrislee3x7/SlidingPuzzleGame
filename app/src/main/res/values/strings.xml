@@ -6,8 +6,8 @@
 
     <string name="pre_start_title">Start Game</string>
     <string name="difficulty_text">Difficulty:</string>
-    <string name="default_time_value">––:––:––</string>
-    <string name="default_movecount_value">–</string>
+    <string name="default_time_value">-1</string>
+    <string name="default_movecount_value">-1</string>
     <string name="default_end_screen_title">Congratulations!</string>
     <string name="give_up">Give Up</string>
     <string name="statistics">Statistics</string>
@@ -21,6 +21,8 @@
     <string name="difficulty6">6 x 6</string>
     <string name="best_time_text">Best Time:</string>
     <string name="best_movecount_text">Best Movecount:</string>
+    <string name="time_sum_text">Average Time:</string>
+    <string name="movecount_sum_text">Average Movecount:</string>
     <string-array name="difficulty_choices">
         <item>@string/difficulty3</item>
 <!--        <item>2 x 2</item>-->
@@ -30,4 +32,7 @@
     </string-array>
     <string name="shared_preference_best_time">Best Time</string>
     <string name="shared_preference_best_movecount">Best Movecount</string>
+    <string name="shared_preference_time_sum">Time Sum</string>
+    <string name="shared_preference_movecount_sum">Movecount Sum</string>
+    <string name="shared_preference_solve_count">Solve Count</string>
 </resources>

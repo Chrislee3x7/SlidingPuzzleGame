@@ -3,7 +3,10 @@ package com.example.slidingpuzzlegame;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,9 +28,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.Locale;
+import java.text.DecimalFormat;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -56,8 +60,9 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     private int numberOfMoves = 0;
 
     //timer stuff
+    private DecimalFormat df = new DecimalFormat("0.0");
     private TextView stopwatch;
-    private int seconds = 0;
+    private double seconds = 0;
     private boolean running = false;
     private boolean paused = false;
 
@@ -76,8 +81,8 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
     private ImageView bestIconMovecount;
 
 
-    private String bestTime;
-    private String bestMoveCount;
+    private float bestTime;
+    private int bestMoveCount;
 
     //pause stuff
     private LinearLayout pauseMenu;
@@ -123,23 +128,30 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
             @Override
 
             public void run() {
-                int hours = seconds / 3600;
-                int minutes = (seconds % 3600) / 60;
-                int secs = seconds % 60;
+//                int hours = seconds / 3600;
+//                int minutes = (seconds % 3600) / 60;
+//                int secs = seconds % 60;
+
                 // Format the seconds into hours, minutes,
                 // and seconds.
-                String time = String.format(Locale.getDefault(),
-                        "%d:%02d:%02d", hours, minutes, secs);
+//                String time = String.format(Locale.getDefault(),
+//                        "%d:%02d:%02d", hours, minutes, secs);
+
+
+                String time = df.format(seconds);
                 // Set the text view text.
                 stopwatch.setText(time);
                 // If running is true, increment the
                 // seconds variable.
                 if (running) {
-                    seconds++;
+                    if (stopwatch.getVisibility() != View.VISIBLE) {
+                        stopwatch.setVisibility(View.VISIBLE);
+                    }
+                    seconds += 0.1;
                 }
                 // Post the code again
                 // with a delay of 1 second.
-                handler.postDelayed(this, 1000);
+                handler.postDelayed(this, 100);
             }
         });
     }
@@ -178,80 +190,127 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         movecount.setVisibility(View.INVISIBLE);
         pauseButton.setVisibility(View.INVISIBLE);
         darkenBackground.setClickable(false);
-        String currentTime = stopwatch.getText().toString();
-        String currentMovecount = movecount.getText().toString();
+        float currentTime = Float.parseFloat(stopwatch.getText().toString());
+        int currentMovecount = Integer.parseInt(movecount.getText().toString());
         if (!successful) {
             endScreenTitle.setText("Try Again");
             SoundPlayer.playAwwDisappointment(getContext());
         } else {
             SoundPlayer.playApplause(getContext());
-            endScreenTime.setText(currentTime);
-            endScreenMovecount.setText(String.valueOf(currentMovecount));
-            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            incrementSolveCount();
+            addToTimeSum(currentTime);
+            addToMovecountSum(currentMovecount);
+
             boolean isNewBestTime = isNewBestTime(currentTime);
             boolean isNewBestMovecount = isNewBestMovecount(currentMovecount);
+
             if (isNewBestTime) {
-                bestIconTime.setVisibility(View.VISIBLE);
-                bestTime = currentTime;
-                endScreenTimeBest.setText(currentTime);
-                editor.putString("Best Time" + difficulty, stopwatch.getText().toString());
-                editor.apply();
+                setNewBestTime(currentTime);
             }
+
             if (isNewBestMovecount) {
-                bestIconMovecount.setVisibility(View.VISIBLE);
-                bestMoveCount = currentMovecount;
-                editor.putInt("Best Movecount" + difficulty, Integer.parseInt(movecount.getText().toString()));
-                editor.apply();
+                setNewBestMovecount(currentMovecount);
             }
+
             if (isNewBestTime || isNewBestMovecount) {
                 SoundPlayer.playWowSparkle(getContext());
             }
         }
-        endScreenTimeBest.setText(bestTime);
-        endScreenMovecountBest.setText(bestMoveCount);
+        endScreenTime.setText(!successful ? "–" : String.format(Float.toString(currentTime), df));
+        endScreenMovecount.setText(!successful ? "–" : Integer.toString(currentMovecount));
+        endScreenTimeBest.setText(bestTime < 0 ? "–" : String.valueOf(bestTime));
+        endScreenMovecountBest.setText(bestMoveCount < 0 ? "–" : String.valueOf(bestMoveCount));
+        darkenBackground.setAnimation(fadeIn);
+        endScreen.setAnimation(fadeIn);
         darkenBackground.setVisibility(View.VISIBLE);
         endScreen.setVisibility(View.VISIBLE);
 
 
     }
 
-    private String getBestTime() {
-        return sharedPreferences.getString(getString(R.string.shared_preference_best_time) + difficulty,
-                getString(R.string.default_time_value));
-
+    private float getTimeSum() {
+        return sharedPreferences.getFloat(getString(R.string.shared_preference_time_sum) + difficulty, 0);
     }
 
-    private String getBestMovecount() {
-        if (!sharedPreferences.contains(getString(R.string.shared_preference_best_movecount) + difficulty)) {
-            return getString(R.string.default_movecount_value);
-        }
-        return Integer.toString(sharedPreferences.getInt(getString(R.string.shared_preference_best_movecount) + difficulty, 0));
+    private int getMovecountSum() {
+        return sharedPreferences.getInt(getString(R.string.shared_preference_movecount_sum) + difficulty, 0);
     }
 
-    private boolean isNewBestTime(String curentTime) {
-        if (bestTime.equals(getString(R.string.default_time_value))) {
+    private int getSolveCount() {
+        return sharedPreferences.getInt(getString(R.string.shared_preference_solve_count) + difficulty, 0);
+    }
+
+    private void incrementSolveCount() {
+        sharedPreferences.edit().putInt(getString(R.string.shared_preference_solve_count) + difficulty,
+                getSolveCount() + 1).apply();
+    }
+
+    private void addToTimeSum(float timeToAdd) {
+        sharedPreferences.edit().putFloat(getString(R.string.shared_preference_time_sum) + difficulty,
+                getTimeSum() + timeToAdd).apply();
+    }
+
+    private void addToMovecountSum(int movecountToAdd) {
+        sharedPreferences.edit().putInt(getString(R.string.shared_preference_movecount_sum) + difficulty,
+                getMovecountSum() + movecountToAdd).apply();
+    }
+
+    private float getBestTime() {
+        return sharedPreferences.getFloat(getString(R.string.shared_preference_best_time)
+                        + difficulty,
+                Float.parseFloat(getString(R.string.default_time_value)));
+    }
+
+    private void setNewBestTime(float currentTime) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        bestIconTime.setVisibility(View.VISIBLE);
+        bestTime = currentTime;
+        endScreenTimeBest.setText(currentTime < 0 ? "–" : String.valueOf(currentTime));
+        editor.putFloat("Best Time" + difficulty, Float.parseFloat(stopwatch.getText().toString()));
+        editor.apply();
+    }
+
+    private int getBestMovecount() {
+        return sharedPreferences.getInt(getString(R.string.shared_preference_best_movecount) + difficulty,
+                Integer.parseInt(getString(R.string.default_movecount_value)));
+    }
+
+    public void setNewBestMovecount(int currentMovecount) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        bestIconMovecount.setVisibility(View.VISIBLE);
+        bestMoveCount = currentMovecount;
+        endScreenTimeBest.setText(currentMovecount < 0 ? "–" :String.valueOf(currentMovecount));
+        editor.putInt("Best Movecount" + difficulty, Integer.parseInt(movecount.getText().toString()));
+        editor.apply();
+    }
+
+    private boolean isNewBestTime(double curentTime) {
+
+        if (bestTime == Double.parseDouble(getString(R.string.default_time_value))) {
             return true;
         }
-        if (curentTime.substring(0, 1).equals(bestTime.substring(0, 1))) {
-            if (curentTime.substring(2, 4).equals(bestTime.substring(2, 4))) {
-                if (curentTime.substring(5, 7).equals(bestTime.substring(5, 7))) {
-                    return false;
-                } else {
-                    return Integer.parseInt(curentTime.substring(5, 7)) < Integer.parseInt(bestTime.substring(5, 7));
-                }
-            } else {
-                return Integer.parseInt(curentTime.substring(2, 4)) < Integer.parseInt(bestTime.substring(2, 4));
-            }
-        } else {
-            return Integer.parseInt(curentTime.substring(0, 1)) < Integer.parseInt(bestTime.substring(0, 1));
-        }
+        return curentTime < bestTime;
+//        if (curentTime.substring(0, 1).equals(bestTime.substring(0, 1))) {
+//            if (curentTime.substring(2, 4).equals(bestTime.substring(2, 4))) {
+//                if (curentTime.substring(5, 7).equals(bestTime.substring(5, 7))) {
+//                    return false;
+//                } else {
+//                    return Integer.parseInt(curentTime.substring(5, 7)) < Integer.parseInt(bestTime.substring(5, 7));
+//                }
+//            } else {
+//                return Integer.parseInt(curentTime.substring(2, 4)) < Integer.parseInt(bestTime.substring(2, 4));
+//            }
+//        } else {
+//            return Integer.parseInt(curentTime.substring(0, 1)) < Integer.parseInt(bestTime.substring(0, 1));
+//        }
     }
 
-    public boolean isNewBestMovecount(String currentMovecount) {
-        if (bestMoveCount.equals(getString(R.string.default_movecount_value))) {
+    public boolean isNewBestMovecount(int currentMovecount) {
+        if (bestMoveCount == Integer.parseInt(getString(R.string.default_movecount_value))) {
             return true;
         }
-        return Integer.parseInt(currentMovecount) < Integer.parseInt(bestMoveCount);
+        return currentMovecount < bestMoveCount;
     }
 
     @Override
@@ -311,7 +370,24 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
             } catch (IOException e) {
                 //input null
             }
+            String path = selectedImage.getPath();
+            ExifInterface exif = null;
+            try {
+                exif = new ExifInterface(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (exif != null) {
+                Toast.makeText(getContext(), "exif is not null", Toast.LENGTH_SHORT).show();
+                int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                        ExifInterface.ORIENTATION_UNDEFINED);
+                bitmap = rotateBitmap(bitmap ,orientation);
+            }
+            else {
+                Toast.makeText(getContext(), "exif IS null", Toast.LENGTH_SHORT).show();
+            }
         }
+
 
         final GridLayout puzzleBoard = (GridLayout) rootView.findViewById(R.id.puzzle_board);
         puzzleMatrix = new PuzzleMatrix(difficulty, getResources(), this.getContext(), puzzleBoard,
@@ -336,6 +412,9 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         endScreenStatsButton = (ImageButton) rootView.findViewById(R.id.stats_button);
         endScreenStatsButton.setOnClickListener(this);
         sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.clear();
+//        editor.apply();
         bestIconTime = rootView.findViewById(R.id.best_icon_time);
         bestIconMovecount = rootView.findViewById(R.id.best_icon_movecount);
 
@@ -360,7 +439,7 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         broadcastReceiver = new MyReceiver();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        getActivity().registerReceiver(broadcastReceiver, filter);
+        //getActivity().registerReceiver(broadcastReceiver, filter);
 
 
         //        scrambleButton = rootView.findViewById(R.id.scramble_button);
@@ -368,6 +447,70 @@ public class PuzzleFragment extends Fragment implements View.OnClickListener {
         // Return the View for the fragment's UI.
         return rootView;
     }
+
+//    //convert the image URI to the direct file system path of the image file
+//    public String getRealPathFromURI(Uri contentUri) {
+//
+//        // can post image
+//        String[] proj = {MediaStore.Images.Media.DATA};
+//        Cursor cursor = getActivity().managedQuery(contentUri,
+//                proj, // Which columns to return
+//                null,       // WHERE clause; which rows to return (all rows)
+//                null,       // WHERE clause selection arguments (none)
+//                null); // Order-by clause (ascending by name)
+//        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//        cursor.moveToFirst();
+//
+//        return cursor.getString(column_index);
+//    }
+
+
+
+    public static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
+
+        Matrix matrix = new Matrix();
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_NORMAL:
+                return bitmap;
+            case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+                matrix.setScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                matrix.setRotate(180);
+                break;
+            case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+                matrix.setRotate(180);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_TRANSPOSE:
+                matrix.setRotate(90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                matrix.setRotate(90);
+                break;
+            case ExifInterface.ORIENTATION_TRANSVERSE:
+                matrix.setRotate(-90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                matrix.setRotate(-90);
+                break;
+            default:
+                return bitmap;
+        }
+        try {
+            Bitmap bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            bitmap.recycle();
+            return bmRotated;
+        }
+        catch (OutOfMemoryError e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
     public void updateRecords() {
         bestTime = getBestTime();
